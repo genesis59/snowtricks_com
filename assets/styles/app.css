@@ -1,3 +1,107 @@
-body {
-    background-color: lightgray;
+@import "~bootstrap";
+
+@font-face {
+    font-family: 'Snowboarding';
+    src: url('../../public/font/Snowboarding.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --theme-color-dark-dark-blue: #010144;
+    --theme-color-dark-blue: #00006B;
+    --theme-color-blue: #09078A;
+    --theme-color-light-blue: #1400CC;
+    --theme-color-apple: #C5F21D;
+    --theme-color-yellow: #FBFF3D;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: "Roboto Thin", sans-serif;
+}
+
+/*navbar*/
+.navbar-bg-custom {
+    background-color: var(--theme-color-dark-dark-blue);
+}
+
+/*end navbar*/
+/*footer*/
+.footer {
+    background-color: var(--theme-color-dark-dark-blue);
+}
+
+/*end footer*/
+/*header*/
+.box-header {
+    background: url("../../public/images/header.jpg") center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.catchphrase-box-header {
+    position: relative;
+    font-family: 'Snowboarding', sans-serif;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-color-apple);
+    width: 70vw;
+    line-height: 87px;
+}
+
+.catchphrase-box-header-fs-jp {
+    font-family: "Noto Serif CJK JP", sans-serif;
+    font-size: 55px;
+}
+
+.catchphrase-box-header-fs-base {
+    font-size: 144px;
+}
+
+.catchphrase-box-header p {
+    margin: 0;
+}
+
+/*end header*/
+/*navfooter*/
+.navfooter {
+    display: none;
+}
+
+/*end navfooter*/
+
+@media screen and (min-height: 1080px) {
+    /*navbar*/
+    .navbar-bg-custom {
+        display: none;
+    }
+
+    /*end navbar*/
+    /*footer*/
+    .footer {
+        display: none;
+    }
+
+    /*end footer*/
+    /*navfooter*/
+    .navfooter {
+        border-top: 2px solid black;
+        padding: 20px 80px;
+        color: white;
+        justify-content: space-around;
+        align-items: center;
+        display: flex;
+        height: 60px;
+    }
+
+    /*end navfooter*/
 }

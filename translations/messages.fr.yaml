@@ -1,2 +1,11 @@
 snow_trick:
-  hello: Salut trad!
+  header:
+    image:
+      alt: photo d'un snowboarder
+    title: Partage ton style
+  navbar:
+    home: Accueil
+    tricks: Tricks
+    in: Se connecter
+    out: Se déconnecter
+    up: S'inscrire

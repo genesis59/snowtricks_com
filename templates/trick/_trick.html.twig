@@ -1,0 +1,23 @@
+{% set cardImage = "default.jpg" %}
+{% for picture in trick.picture %}
+    {% if loop.first %}
+        {% set cardImage = picture.name %}
+    {% endif %}
+{% endfor %}
+<div class="col-12 col-lg-3 my-3 text-center">
+    <div class="card">
+        <img src="{{ asset('images/picture/' ~ cardImage ) }}" class="card-img-top" alt="...">
+        <div class="d-flex card-body justify-content-around align-content-center">
+            <div>
+                <h5 class="card-title">{{ trick.name }}</h5>
+            </div>
+            <div>
+                <img src="{{ asset('images/pencil.png') }}" alt="">
+            </div>
+            <div>
+                <img src="{{ asset('images/trash.png') }}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
