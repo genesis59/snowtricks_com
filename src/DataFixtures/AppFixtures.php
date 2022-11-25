@@ -271,7 +271,7 @@ class AppFixtures extends Fixture
             ${'trick' . $i}->setDescription($trickData[$i - 1][2]);
             ${'trick' . $i}->setCreatedAt(new \DateTimeImmutable());
             ${'trick' . $i}->setTrickGroup($trickData[$i - 1][3]);
-            ${'trick' . $i}->setUuid(Uuid::v4());
+            ${'trick' . $i}->setUser($user1);
             $manager->persist(${'trick' . $i});
         }
 
@@ -307,19 +307,13 @@ class AppFixtures extends Fixture
             'mfm-butter-180.jpg',
             'board-slide.jpg',
             'japan-air.jpg',
-            'indy-grab.jpg',
-            '360-front.jpg',
-            'frontside-cork-540.jpg',
-            'fifty-fifty.jpg',
-            'mfm-butter-180.jpg',
-            'board-slide.jpg',
-            'japan-air.jpg',
             'indy-grab.jpg'
         ];
         for ($i = 1; $i <= count($pictureData); $i++) {
             $picture = new Picture();
-            $picture->setName($pictureData[$i - 1]);
+            $picture->setFileName($pictureData[$i - 1]);
             $picture->setUuid(Uuid::v4());
+            $picture->setIsMain(true);
             $picture->setTrick(${'trick' . $i});
             $manager->persist($picture);
         }

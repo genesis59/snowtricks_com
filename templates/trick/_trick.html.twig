@@ -1,7 +1,7 @@
 {% set cardImage = "default.jpg" %}
 {% for picture in trick.picture %}
-    {% if loop.first %}
-        {% set cardImage = picture.name %}
+    {% if picture.isMain %}
+        {% set cardImage = picture.fileName %}
     {% endif %}
 {% endfor %}
 <div class="col-12 col-lg-3 my-3 text-center">
