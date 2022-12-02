@@ -19,9 +19,22 @@
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
     box-sizing: border-box;
+    min-height: 100vh;
     font-family: "Roboto Thin", sans-serif;
+}
+
+.btn-primary {
+    background-color: var(--theme-color-dark-dark-blue);
+    border-color: var(--theme-color-dark-dark-blue);
+}
+.btn-primary:hover {
+    background-color: var(--theme-color-blue);
+    border-color: var(--theme-color-blue);
+}
+
+.height-div-screen-80 {
+    height: 80vh;
 }
 
 /*navbar*/
@@ -100,8 +113,31 @@ html, body {
         justify-content: space-around;
         align-items: center;
         display: flex;
-        height: 60px;
+        height: 100px;
+    }
+    .navfooter img {
+        width: 48px;
     }
 
     /*end navfooter*/
+
+    .card-title{
+        font-size: 2rem;
+    }
+    .card-body img {
+        width: 36px;
+    }
+
+    .catchphrase-box-header-fs-base {
+        font-size: 233px;
+    }
+    .login-container h1 {
+        font-size: 4rem;
+    }
+    .login-container label {
+        font-size: 2rem;
+    }
+    .login-container button {
+        font-size: 2rem;
+    }
 }
