@@ -14,31 +14,22 @@ class Picture
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(type: Types::GUID)]
+    private ?string $uuid = null;
 
     #[ORM\ManyToOne(inversedBy: 'picture')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Trick $trick = null;
 
-    #[ORM\Column(type: Types::GUID)]
-    private ?string $uuid = null;
+    #[ORM\Column]
+    private ?bool $isMain = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $fileName = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getTrick(): ?Trick
@@ -61,6 +52,30 @@ class Picture
     public function setUuid(string $uuid): self
     {
         $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function isIsMain(): ?bool
+    {
+        return $this->isMain;
+    }
+
+    public function setIsMain(bool $isMain): self
+    {
+        $this->isMain = $isMain;
+
+        return $this;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(string $fileName): self
+    {
+        $this->fileName = $fileName;
 
         return $this;
     }

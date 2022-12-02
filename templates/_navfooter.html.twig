@@ -1,14 +1,17 @@
-<footer class="navfooter">
+<footer class="navfooter bg-light {{ app.request.pathInfo == "/connexion" ? "fixed-bottom" : "sticky-bottom" }}">
         <div>
-                <img src="{{ asset('images/home.png') }}" alt="">
+                <a href="{{ path('home') }}"><img src="{{ asset('images/home.png') }}" alt=""></a>
         </div>
         <div>
-                <img src="{{ asset('images/signet.png') }}" alt="">
+                <img src="{{ asset('images/signet.png') }}" width="48" alt="">
         </div>
+        {% if not app.user %}
         <div>
-                <img src="{{ asset('images/entrer.png') }}" alt="">
+                <a href="{{ path('app_login') }}"><img src="{{ asset('images/entrer.png') }}" alt=""></a>
         </div>
+        {% else %}
         <div>
-                <img src="{{ asset('images/sortie.png') }}" alt="">
+                <a href="{{ path('app_logout') }}"><img src="{{ asset('images/sortie.png') }}" alt=""></a>
         </div>
+        {% endif %}
 </footer>

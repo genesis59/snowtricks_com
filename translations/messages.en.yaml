@@ -1,0 +1,19 @@
+snow_trick:
+  login:
+    main: Please sign in
+    name: Your name
+    password: Your password
+    button: Sign in
+    already: You are logged in as
+    out: Logout
+    error: Invalid credentials.
+  header:
+    title: Follow your style
+    image:
+      alt: photo of a snowboarder
+  navbar:
+    home: Home
+    tricks: Add a trick
+    in: Sign in
+    out: Sign out
+    up: Sign up
