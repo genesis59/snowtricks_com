@@ -1,0 +1,11 @@
+snow_trick:
+  header:
+    title: スタイルを共有する
+    image:
+      alt: スノーボーダー写真
+  navbar:
+    home: ホーム
+    tricks: 詭計
+    in: ログイン
+    out: サインアウト
+    up: サインアップ

@@ -1,0 +1,11 @@
+snow_trick:
+  header:
+    title: Follow your style
+    image:
+      alt: photo of a snowboarder
+  navbar:
+    home: Home
+    tricks: Tricks
+    in: Sign in
+    out: Sign out
+    up: Sign up

@@ -3,64 +3,27 @@
 namespace App\DataFixtures;
 
 use App\Entity\Group;
-use App\Entity\Photo;
-use App\Entity\Picture;
 use App\Entity\Trick;
 use App\Entity\User;
-use App\Entity\Video;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Uid\Uuid;
 
-class AppFixtures extends Fixture
+class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
+        /** @var Group $group0 */
+        $group0 = $this->getReference('group0');
+        /** @var Group $group1 */
+        $group1 = $this->getReference('group1');
+        /** @var Group $group2 */
+        $group2 = $this->getReference('group2');
+        /** @var Group $group3 */
+        $group3 = $this->getReference('group3');
+        /** @var Group $group4 */
+        $group4 = $this->getReference('group4');
 
-        // Group
-        $groupData = ['Grabs', 'Rotations', 'Rotations désaxés', 'Slides', 'Old school'];
-        $groupList = [];
-        for ($i = 1; $i <= count($groupData); $i++) {
-            $group = new Group();
-            $group->setUuid(Uuid::v4());
-            $group->setName($groupData[$i - 1]);
-            $manager->persist($group);
-            $groupList[] = $group;
-        }
-
-        // User (mdp: testtest)
-        $userData = [
-            ['bunny', 'bunny@google.com'],
-            ['lion', 'lion@google.com'],
-            ['bear', 'bear@google.com'],
-            ['whale', 'whale@google.com'],
-            ['monkey', 'monkey@google.com'],
-            ['elephant', 'elephant@google.com'],
-        ];
-        for ($i = 1; $i <= count($userData); $i++) {
-            ${'user' . $i} = new User();
-            ${'user' . $i}->setName($userData[$i - 1][0]);
-            ${'user' . $i}->setEmail($userData[$i - 1][1]);
-            ${'user' . $i}->setPassword(
-                '$argon2i$v=19$m=65536,t=4,p=1$ckxBTVpUdGVzTngzN3hCbg$hGt7lkQw2dsF9dsskfu0TYC17JyT5fiIB9ddz0FTMSA'
-            );
-            ${'user' . $i}->setCreatedAt(new \DateTimeImmutable());
-            ${'user' . $i}->setUuid(Uuid::v4());
-            $manager->persist(${'user' . $i});
-        }
-
-
-        // Photo
-        $photoData = ['bunny.jpg', 'lion.jpg', 'bear.jpg', 'whale.jpg', 'monkey.jpg', 'elephant.jpg'];
-        for ($i = 1; $i <= count($photoData); $i++) {
-            $photo = new Photo();
-            $photo->setUuid(Uuid::v4());
-            $photo->setName($photoData[$i - 1]);
-            $photo->setUser(${'user' . $i});
-            $manager->persist($photo);
-        }
-
-        // Trick
         $trickData = [
             [
                 '360 front',
@@ -68,21 +31,21 @@ class AppFixtures extends Fixture
                 'Si vous aimez le snowboard, vous avez sans doute envie d\'apprendre des figures et des sauts ! Un 360 
                 frontside consiste à quitter la pente et à effectuer une rotation de 360 degrés dans les airs avant de 
                 toucher à nouveau le sol.',
-                $groupList[1]
+                $group1
             ],
             [
                 'Frontside Cork 540',
                 'frontside-cork-540',
                 'Le frontside Cork 540 est l\'une des meilleures figures de snowboard. Cette combinaison de flip et de 
                 spin est facile à regarder, et étonnamment facile en général une fois que l\'on s\'y est habitué.',
-                $groupList[2]
+                $group2
             ],
             [
                 'Fifty fifty',
                 'fifty-fifty',
                 'Le 50 50 ou fifty fifty est le premier slide à essayer. Si vous êtes débutant et que vous souhaitez 
                 apprendre à slider en snowboard, regarder les tutoriels vidéos de Nomad Snowboard.',
-                $groupList[3]
+                $group3
             ],
             [
                 'MFM Butter 180',
@@ -97,7 +60,7 @@ class AppFixtures extends Fixture
                 Dylan Gamache du crew les Yawgoons, actualise sans cesse ce tricks. Dans une version plus mainstream, 
                 on retrouve des snowboarders comme Marcus Kleveland qui contribue au renouveau de la pratique du 
                 buttering, grâce à des performances exceptionnelles et à une grosse présence sur les réseaux sociaux.',
-                $groupList[2]
+                $group2
             ],
             [
                 'Board slide',
@@ -111,7 +74,7 @@ class AppFixtures extends Fixture
                  rail qui ne soit pas trop haut, ou même qui touche le sol puis monte progressivement. Ainsi, il 
                  suffit de rouler, de lever les roues avant et les passer par-dessus la barre, de manière à se 
                  positionner en boardslide.Un darkslide est un boardslide fait avec le skate à l\'envers.',
-                $groupList[3]
+                $group3
             ],
             [
                 'Japan Air',
@@ -119,7 +82,7 @@ class AppFixtures extends Fixture
                 'Un Japan est essentiellement une prise muette que vous tweakez derrière votre dos ! Un bon tweaked 
                 Japan est très divertissant à regarder et encore plus amusant à piétiner. Ajouter des Japan grabs 
                 à vos tricks est un moyen sûr d\'obtenir des props de vos amis.',
-                $groupList[4]
+                $group4
             ],
             [
                 'Indy Grab',
@@ -127,7 +90,7 @@ class AppFixtures extends Fixture
                 'Un indy grab, généralement appelé simplement indy, est un trick de skateboard. C\'est un trick aérien 
                 de la catégorie des grabs durant lequel le skateur saisit le milieu de sa planche, entre ses deux 
                 pieds, sur le côté où pointent ses orteils. L\'indy est effectué depuis les années \'70.',
-                $groupList[0]
+                $group0
             ],
             [
                 '360 front 2',
@@ -135,21 +98,21 @@ class AppFixtures extends Fixture
                 'Si vous aimez le snowboard, vous avez sans doute envie d\'apprendre des figures et des sauts ! Un 360 
                 frontside consiste à quitter la pente et à effectuer une rotation de 360 degrés dans les airs avant de 
                 toucher à nouveau le sol.',
-                $groupList[1]
+                $group1
             ],
             [
                 'Frontside Cork 540 2',
                 'frontside-cork-540-2',
                 'Le frontside Cork 540 est l\'une des meilleures figures de snowboard. Cette combinaison de flip et de 
                 spin est facile à regarder, et étonnamment facile en général une fois que l\'on s\'y est habitué.',
-                $groupList[2]
+                $group2
             ],
             [
                 'Fifty fifty2',
                 'fifty-fifty2',
                 'Le 50 50 ou fifty fifty est le premier slide à essayer. Si vous êtes débutant et que vous souhaitez 
                 apprendre à slider en snowboard, regarder les tutoriels vidéos de Nomad Snowboard.',
-                $groupList[3]
+                $group3
             ],
             [
                 'MFM Butter 180 2',
@@ -164,7 +127,7 @@ class AppFixtures extends Fixture
                 Dylan Gamache du crew les Yawgoons, actualise sans cesse ce tricks. Dans une version plus mainstream, 
                 on retrouve des snowboarders comme Marcus Kleveland qui contribue au renouveau de la pratique du 
                 buttering, grâce à des performances exceptionnelles et à une grosse présence sur les réseaux sociaux.',
-                $groupList[2]
+                $group2
             ],
             [
                 'Board slide2',
@@ -178,7 +141,7 @@ class AppFixtures extends Fixture
                  rail qui ne soit pas trop haut, ou même qui touche le sol puis monte progressivement. Ainsi, il 
                  suffit de rouler, de lever les roues avant et les passer par-dessus la barre, de manière à se 
                  positionner en boardslide.Un darkslide est un boardslide fait avec le skate à l\'envers.',
-                $groupList[3]
+                $group3
             ],
             [
                 'Japan Air2',
@@ -186,7 +149,7 @@ class AppFixtures extends Fixture
                 'Un Japan est essentiellement une prise muette que vous tweakez derrière votre dos ! Un bon tweaked 
                 Japan est très divertissant à regarder et encore plus amusant à piétiner. Ajouter des Japan grabs 
                 à vos tricks est un moyen sûr d\'obtenir des props de vos amis.',
-                $groupList[4]
+                $group4
             ],
             [
                 'Indy Grab2',
@@ -194,7 +157,7 @@ class AppFixtures extends Fixture
                 'Un indy grab, généralement appelé simplement indy, est un trick de skateboard. C\'est un trick aérien 
                 de la catégorie des grabs durant lequel le skateur saisit le milieu de sa planche, entre ses deux 
                 pieds, sur le côté où pointent ses orteils. L\'indy est effectué depuis les années \'70.',
-                $groupList[0]
+                $group0
             ],
             [
                 '360 front 3',
@@ -202,21 +165,21 @@ class AppFixtures extends Fixture
                 'Si vous aimez le snowboard, vous avez sans doute envie d\'apprendre des figures et des sauts ! Un 360 
                 frontside consiste à quitter la pente et à effectuer une rotation de 360 degrés dans les airs avant de 
                 toucher à nouveau le sol.',
-                $groupList[1]
+                $group1
             ],
             [
                 'Frontside Cork 540 3',
                 'frontside-cork-540-3',
                 'Le frontside Cork 540 est l\'une des meilleures figures de snowboard. Cette combinaison de flip et de 
                 spin est facile à regarder, et étonnamment facile en général une fois que l\'on s\'y est habitué.',
-                $groupList[2]
+                $group2
             ],
             [
                 'Fifty fifty3',
                 'fifty-fifty3',
                 'Le 50 50 ou fifty fifty est le premier slide à essayer. Si vous êtes débutant et que vous souhaitez 
                 apprendre à slider en snowboard, regarder les tutoriels vidéos de Nomad Snowboard.',
-                $groupList[3]
+                $group3
             ],
             [
                 'MFM Butter 180 3',
@@ -231,7 +194,7 @@ class AppFixtures extends Fixture
                 Dylan Gamache du crew les Yawgoons, actualise sans cesse ce tricks. Dans une version plus mainstream, 
                 on retrouve des snowboarders comme Marcus Kleveland qui contribue au renouveau de la pratique du 
                 buttering, grâce à des performances exceptionnelles et à une grosse présence sur les réseaux sociaux.',
-                $groupList[2]
+                $group2
             ],
             [
                 'Board slide3',
@@ -245,7 +208,7 @@ class AppFixtures extends Fixture
                  rail qui ne soit pas trop haut, ou même qui touche le sol puis monte progressivement. Ainsi, il 
                  suffit de rouler, de lever les roues avant et les passer par-dessus la barre, de manière à se 
                  positionner en boardslide.Un darkslide est un boardslide fait avec le skate à l\'envers.',
-                $groupList[3]
+                $group3
             ],
             [
                 'Japan Air3',
@@ -253,7 +216,7 @@ class AppFixtures extends Fixture
                 'Un Japan est essentiellement une prise muette que vous tweakez derrière votre dos ! Un bon tweaked 
                 Japan est très divertissant à regarder et encore plus amusant à piétiner. Ajouter des Japan grabs 
                 à vos tricks est un moyen sûr d\'obtenir des props de vos amis.',
-                $groupList[4]
+                $group4
             ],
             [
                 'Indy Grab3',
@@ -261,64 +224,30 @@ class AppFixtures extends Fixture
                 'Un indy grab, généralement appelé simplement indy, est un trick de skateboard. C\'est un trick aérien 
                 de la catégorie des grabs durant lequel le skateur saisit le milieu de sa planche, entre ses deux 
                 pieds, sur le côté où pointent ses orteils. L\'indy est effectué depuis les années \'70.',
-                $groupList[0]
+                $group0
             ]
         ];
         for ($i = 1; $i <= count($trickData); $i++) {
-            ${'trick' . $i} = new Trick();
-            ${'trick' . $i}->setName($trickData[$i - 1][0]);
-            ${'trick' . $i}->setSlug($trickData[$i - 1][1]);
-            ${'trick' . $i}->setDescription($trickData[$i - 1][2]);
-            ${'trick' . $i}->setCreatedAt(new \DateTimeImmutable());
-            ${'trick' . $i}->setTrickGroup($trickData[$i - 1][3]);
-            ${'trick' . $i}->setUser($user1);
-            $manager->persist(${'trick' . $i});
+            /** @var User $user */
+            $user = $this->getReference('user1');
+            $trick = new Trick();
+            $trick->setName($trickData[$i - 1][0]);
+            $trick->setSlug($trickData[$i - 1][1]);
+            $trick->setDescription($trickData[$i - 1][2]);
+            $trick->setCreatedAt(new \DateTimeImmutable());
+            $trick->setTrickGroup($trickData[$i - 1][3]);
+            $trick->setUser($user);
+            $this->addReference('trick' . $i, $trick);
+            $manager->persist($trick);
         }
-
-        // Video
-        $videoData = [
-            'https://www.youtube.com/embed/JJy39dO_PPE',
-            'https://www.youtube.com/embed/FMHiSF0rHF8',
-            'https://www.youtube.com/embed/n9ifYkF-ghw',
-            'https://www.youtube.com/embed/LyfFuv4_wjQ',
-            'https://www.youtube.com/embed/12OHPNTeoRs',
-            'https://www.youtube.com/embed/CzDjM7h_Fwo',
-            'https://www.youtube.com/embed/iKkhKekZNQ8',
-            'https://www.youtube.com/embed/JJy39dO_PPE',
-            'https://www.youtube.com/embed/FMHiSF0rHF8',
-            'https://www.youtube.com/embed/n9ifYkF-ghw',
-            'https://www.youtube.com/embed/LyfFuv4_wjQ',
-            'https://www.youtube.com/embed/12OHPNTeoRs',
-            'https://www.youtube.com/embed/CzDjM7h_Fwo',
-            'https://www.youtube.com/embed/iKkhKekZNQ8'
-        ];
-        for ($i = 1; $i <= count($videoData); $i++) {
-            $video = new Video();
-            $video->setUuid(Uuid::v4());
-            $video->setSource($videoData[$i - 1]);
-            $video->setTrick(${'trick' . $i});
-            $manager->persist($video);
-        }
-        // Picture
-        $pictureData = [
-            '360-front.jpg',
-            'frontside-cork-540.jpg',
-            'fifty-fifty.jpg',
-            'mfm-butter-180.jpg',
-            'board-slide.jpg',
-            'japan-air.jpg',
-            'indy-grab.jpg'
-        ];
-        for ($i = 1; $i <= count($pictureData); $i++) {
-            $picture = new Picture();
-            $picture->setFileName($pictureData[$i - 1]);
-            $picture->setUuid(Uuid::v4());
-            $picture->setIsMain(true);
-            $picture->setTrick(${'trick' . $i});
-            $manager->persist($picture);
-        }
-        // Comment
-
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            GroupFixtures::class,
+            UserFixtures::class
+        ];
     }
 }
