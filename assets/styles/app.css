@@ -24,10 +24,15 @@ html, body {
     font-family: "Roboto Thin", sans-serif;
 }
 
+li {
+    list-style: none;
+}
+
 .btn-primary {
     background-color: var(--theme-color-dark-dark-blue);
     border-color: var(--theme-color-dark-dark-blue);
 }
+
 .btn-primary:hover {
     background-color: var(--theme-color-blue);
     border-color: var(--theme-color-blue);
@@ -115,15 +120,16 @@ html, body {
         display: flex;
         height: 100px;
     }
+
     .navfooter img {
         width: 48px;
     }
 
     /*end navfooter*/
-
-    .card-title{
+    .card-title {
         font-size: 2rem;
     }
+
     .card-body img {
         width: 36px;
     }
@@ -131,13 +137,12 @@ html, body {
     .catchphrase-box-header-fs-base {
         font-size: 233px;
     }
+
     .login-container h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
-    .login-container label {
-        font-size: 2rem;
-    }
-    .login-container button {
-        font-size: 2rem;
+
+    .login-container label, .login-container button, .login-container .error, .login-container .already, .login-container input {
+        font-size: 1.5rem;
     }
 }

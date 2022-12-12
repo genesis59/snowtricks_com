@@ -1,4 +1,4 @@
-<footer class="navfooter bg-light {{ app.request.pathInfo == "/connexion" ? "fixed-bottom" : "sticky-bottom" }}">
+<footer class="navfooter bg-light {{ fix_footer ? "fixed-bottom" : "sticky-bottom" }}">
         <div>
                 <a href="{{ path('home') }}"><img src="{{ asset('images/home.png') }}" alt=""></a>
         </div>

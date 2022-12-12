@@ -1,12 +1,18 @@
 snow_trick:
+  title:
+    login: ログイン
+    home: XtremSnowTricksへようこそ!
   login:
     main: ログイン
-    name: 名前
+    email: Eメール
     password: パスワード
     button: ログイン
     already: すでにログインしています
     out: サインアウト
-    error: 無効な資格情報
+    forgotten: パスワードをお忘れですか？
+    error:
+      activation: あなたのアカウントはまだ有効化されていません。
+      new_activation_message: 新しいアクティベーション リンクを受け取りたいです。
   header:
     title: スタイルを共有する
     image:
