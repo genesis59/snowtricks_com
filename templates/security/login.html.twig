@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Se connecter!{% endblock %}
+{% block title %}{% trans %}snow_trick.title.login{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="container-fluid login-container">
@@ -8,26 +8,38 @@
             <div class="col-10 col-lg-4 text-center border border-2 border-dark p-5">
                 <form method="post" class="table-responsive">
                     {% if error %}
-                        <div class="alert alert-danger">{% trans %}snow_trick.login.error{% endtrans %}</div>
+                        <div class="alert alert-{{ error.code == 100 ? 'info' : 'danger' }} error">
+                            <p class="m-0">{{ error.messageKey |trans(error.messageData, 'security') }}</p>
+                            {% if error.code == 100 %}
+                                <p>
+                                    <a href="{{ path('app_user_new_activation') }}">{% trans %}snow_trick.login.error.new_activation_message{% endtrans %}</a>
+                                </p>
+                            {% endif %}
+                        </div>
                     {% endif %}
 
                     {% if app.user %}
-                        <div class="mb-3">
-                            {% trans %}snow_trick.login.already{% endtrans %} {{ app.user.name }}, <a href="{{ path('app_logout') }}">{% trans %}snow_trick.login.out{% endtrans %} ?</a>
+                        <div class="mb-3 already">
+                            {% trans %}snow_trick.login.already{% endtrans %} {{ app.user.name }}, <a
+                                    href="{{ path('app_logout') }}">{% trans %}snow_trick.login.out{% endtrans %} ?</a>
                         </div>
                     {% endif %}
 
                     <h1 class="h3 mb-3 font-weight-normal">{% trans %}snow_trick.login.main{% endtrans %}</h1>
-                    <label for="inputUuid" class="mt-3 mb-2">{% trans %}snow_trick.login.name{% endtrans %}</label>
+                    <label for="inputUuid" class="mt-3 mb-2">{% trans %}snow_trick.login.email{% endtrans %}</label>
                     <input type="text" value="{{ last_username }}" name="uuid" id="inputUuid" class="form-control"
                            autocomplete="username" required autofocus>
-                    <label for="inputPassword" class="mt-3 mb-2">{% trans %}snow_trick.login.password{% endtrans %}</label>
+                    <label for="inputPassword"
+                           class="mt-3 mb-2">{% trans %}snow_trick.login.password{% endtrans %}</label>
                     <input type="password" name="password" id="inputPassword" class="form-control"
                            autocomplete="current-password" required>
 
                     <input type="hidden" name="_csrf_token"
                            value="{{ csrf_token('authenticate') }}"
                     >
+                    <div class="mt-3">
+                        <a href="{{ path('app_user_forgotten_password') }}">{% trans %}snow_trick.login.forgotten{% endtrans %}</a>
+                    </div>
 
                     {#
                     Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.

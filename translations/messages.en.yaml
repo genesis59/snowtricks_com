@@ -1,12 +1,25 @@
 snow_trick:
+  title:
+    login: Sign in!
+    home: Welcome to XtremSnowTricks!
+  register:
+    main: Sign up
+    name: Name
+    email: Email
+    password: Password
+    repeat_password: Repeat password
+    button_submit: Register
   login:
     main: Please sign in
-    name: Your name
+    email: Your email
     password: Your password
     button: Sign in
     already: You are logged in as
     out: Logout
-    error: Invalid credentials.
+    forgotten: Forgot your password?
+    error:
+      activation: Your account has not yet been activated.
+      new_activation_message: I want to receive a new activation link.
   header:
     title: Follow your style
     image:
