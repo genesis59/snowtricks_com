@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserCreateController!{% endblock %}
+
+{% block body %}
+    <div class="container-fluid login-container">
+        <div class="row justify-content-center align-items-center height-div-screen-80">
+            <div class="col-10 col-lg-4 text-center border border-2 border-dark p-5">
+                <h1 class="h3 mb-3 font-weight-normal">{% trans %}snow_trick.register.main{% endtrans %}</h1>
+                {{ form(form,{'attr':{'class':'table-responsive'},'method': 'POST'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
