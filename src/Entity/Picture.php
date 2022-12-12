@@ -22,7 +22,7 @@ class Picture
     private ?Trick $trick = null;
 
     #[ORM\Column]
-    private ?bool $isMain = null;
+    private bool $isMain = false;
 
     #[ORM\Column(length: 255)]
     private ?string $fileName = null;
@@ -56,7 +56,7 @@ class Picture
         return $this;
     }
 
-    public function isIsMain(): ?bool
+    public function isIsMain(): bool
     {
         return $this->isMain;
     }
