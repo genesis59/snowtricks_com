@@ -8,9 +8,14 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
+    public function __construct(private readonly SluggerInterface $slugger)
+    {
+    }
+
     public function load(ObjectManager $manager): void
     {
         /** @var Group $group0 */
@@ -27,7 +32,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trickData = [
             [
                 '360 front',
-                '360-front',
                 'Si vous aimez le snowboard, vous avez sans doute envie d\'apprendre des figures et des sauts ! Un 360 
                 frontside consiste à quitter la pente et à effectuer une rotation de 360 degrés dans les airs avant de 
                 toucher à nouveau le sol.',
@@ -35,21 +39,18 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Frontside Cork 540',
-                'frontside-cork-540',
                 'Le frontside Cork 540 est l\'une des meilleures figures de snowboard. Cette combinaison de flip et de 
                 spin est facile à regarder, et étonnamment facile en général une fois que l\'on s\'y est habitué.',
                 $group2
             ],
             [
                 'Fifty fifty',
-                'fifty-fifty',
                 'Le 50 50 ou fifty fifty est le premier slide à essayer. Si vous êtes débutant et que vous souhaitez 
                 apprendre à slider en snowboard, regarder les tutoriels vidéos de Nomad Snowboard.',
                 $group3
             ],
             [
                 'MFM Butter 180',
-                'mfm-butter-180',
                 'Le MFM butter est un grand classique à avoir dans votre palette de tricks. Il est possible de 
                 l’effectuer d’une multitude de manières, ce qui laisse libre cours à votre créativité. 
                 A un niveau plus élevé, les butters peuvent être réalisés sur des modules comme des boxes, 
@@ -64,7 +65,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Board slide',
-                'board-slide',
                 'Le boardslide (prononcez à l\'anglaise, "bort\'slaïde") est un trick de skateboard. Il fait partie
                  de la catégorie des slides et s\'effectue par conséquent sur la partie en bois du skateboard. Un 
                  boardslide consiste à faire passer l\'essieu avant du skateboard au-dessus d\'un obstacle pour faire 
@@ -78,7 +78,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Japan Air',
-                'japan-air',
                 'Un Japan est essentiellement une prise muette que vous tweakez derrière votre dos ! Un bon tweaked 
                 Japan est très divertissant à regarder et encore plus amusant à piétiner. Ajouter des Japan grabs 
                 à vos tricks est un moyen sûr d\'obtenir des props de vos amis.',
@@ -86,7 +85,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Indy Grab',
-                'indy-grab',
                 'Un indy grab, généralement appelé simplement indy, est un trick de skateboard. C\'est un trick aérien 
                 de la catégorie des grabs durant lequel le skateur saisit le milieu de sa planche, entre ses deux 
                 pieds, sur le côté où pointent ses orteils. L\'indy est effectué depuis les années \'70.',
@@ -94,7 +92,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 '360 front 2',
-                '360-front-2',
                 'Si vous aimez le snowboard, vous avez sans doute envie d\'apprendre des figures et des sauts ! Un 360 
                 frontside consiste à quitter la pente et à effectuer une rotation de 360 degrés dans les airs avant de 
                 toucher à nouveau le sol.',
@@ -102,21 +99,18 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Frontside Cork 540 2',
-                'frontside-cork-540-2',
                 'Le frontside Cork 540 est l\'une des meilleures figures de snowboard. Cette combinaison de flip et de 
                 spin est facile à regarder, et étonnamment facile en général une fois que l\'on s\'y est habitué.',
                 $group2
             ],
             [
                 'Fifty fifty2',
-                'fifty-fifty2',
                 'Le 50 50 ou fifty fifty est le premier slide à essayer. Si vous êtes débutant et que vous souhaitez 
                 apprendre à slider en snowboard, regarder les tutoriels vidéos de Nomad Snowboard.',
                 $group3
             ],
             [
                 'MFM Butter 180 2',
-                'mfm-butter-180-2',
                 'Le MFM butter est un grand classique à avoir dans votre palette de tricks. Il est possible de 
                 l’effectuer d’une multitude de manières, ce qui laisse libre cours à votre créativité. 
                 A un niveau plus élevé, les butters peuvent être réalisés sur des modules comme des boxes, 
@@ -131,7 +125,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Board slide2',
-                'board-slide2',
                 'Le boardslide (prononcez à l\'anglaise, "bort\'slaïde") est un trick de skateboard. Il fait partie
                  de la catégorie des slides et s\'effectue par conséquent sur la partie en bois du skateboard. Un 
                  boardslide consiste à faire passer l\'essieu avant du skateboard au-dessus d\'un obstacle pour faire 
@@ -145,7 +138,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Japan Air2',
-                'japan-air2',
                 'Un Japan est essentiellement une prise muette que vous tweakez derrière votre dos ! Un bon tweaked 
                 Japan est très divertissant à regarder et encore plus amusant à piétiner. Ajouter des Japan grabs 
                 à vos tricks est un moyen sûr d\'obtenir des props de vos amis.',
@@ -153,7 +145,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Indy Grab2',
-                'indy-grab2',
                 'Un indy grab, généralement appelé simplement indy, est un trick de skateboard. C\'est un trick aérien 
                 de la catégorie des grabs durant lequel le skateur saisit le milieu de sa planche, entre ses deux 
                 pieds, sur le côté où pointent ses orteils. L\'indy est effectué depuis les années \'70.',
@@ -161,7 +152,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 '360 front 3',
-                '360-front-3',
                 'Si vous aimez le snowboard, vous avez sans doute envie d\'apprendre des figures et des sauts ! Un 360 
                 frontside consiste à quitter la pente et à effectuer une rotation de 360 degrés dans les airs avant de 
                 toucher à nouveau le sol.',
@@ -169,21 +159,18 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Frontside Cork 540 3',
-                'frontside-cork-540-3',
                 'Le frontside Cork 540 est l\'une des meilleures figures de snowboard. Cette combinaison de flip et de 
                 spin est facile à regarder, et étonnamment facile en général une fois que l\'on s\'y est habitué.',
                 $group2
             ],
             [
                 'Fifty fifty3',
-                'fifty-fifty3',
                 'Le 50 50 ou fifty fifty est le premier slide à essayer. Si vous êtes débutant et que vous souhaitez 
                 apprendre à slider en snowboard, regarder les tutoriels vidéos de Nomad Snowboard.',
                 $group3
             ],
             [
                 'MFM Butter 180 3',
-                'mfm-butter-180-3',
                 'Le MFM butter est un grand classique à avoir dans votre palette de tricks. Il est possible de 
                 l’effectuer d’une multitude de manières, ce qui laisse libre cours à votre créativité. 
                 A un niveau plus élevé, les butters peuvent être réalisés sur des modules comme des boxes, 
@@ -198,7 +185,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Board slide3',
-                'board-slide3',
                 'Le boardslide (prononcez à l\'anglaise, "bort\'slaïde") est un trick de skateboard. Il fait partie
                  de la catégorie des slides et s\'effectue par conséquent sur la partie en bois du skateboard. Un 
                  boardslide consiste à faire passer l\'essieu avant du skateboard au-dessus d\'un obstacle pour faire 
@@ -212,7 +198,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Japan Air3',
-                'japan-air3',
                 'Un Japan est essentiellement une prise muette que vous tweakez derrière votre dos ! Un bon tweaked 
                 Japan est très divertissant à regarder et encore plus amusant à piétiner. Ajouter des Japan grabs 
                 à vos tricks est un moyen sûr d\'obtenir des props de vos amis.',
@@ -220,7 +205,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'Indy Grab3',
-                'indy-grab3',
                 'Un indy grab, généralement appelé simplement indy, est un trick de skateboard. C\'est un trick aérien 
                 de la catégorie des grabs durant lequel le skateur saisit le milieu de sa planche, entre ses deux 
                 pieds, sur le côté où pointent ses orteils. L\'indy est effectué depuis les années \'70.',
@@ -232,10 +216,10 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             $user = $this->getReference('user1');
             $trick = new Trick();
             $trick->setName($trickData[$i - 1][0]);
-            $trick->setSlug($trickData[$i - 1][1]);
-            $trick->setDescription($trickData[$i - 1][2]);
+            $trick->setSlug($this->slugger->slug($trickData[$i - 1][0]));
+            $trick->setDescription($trickData[$i - 1][1]);
             $trick->setCreatedAt(new \DateTimeImmutable());
-            $trick->setTrickGroup($trickData[$i - 1][3]);
+            $trick->setTrickGroup($trickData[$i - 1][2]);
             $trick->setUser($user);
             $this->addReference('trick' . $i, $trick);
             $manager->persist($trick);
