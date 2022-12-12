@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string|null The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
@@ -41,9 +41,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private Collection $comments;
 
@@ -52,6 +49,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Trick::class)]
     private Collection $tricks;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $activationToken = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $resetToken = null;
+
+    #[ORM\Column]
+    private ?bool $isActivated = false;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $activationTokenCreatedAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $resetTokenCreatedAt = null;
 
     public function __construct()
     {
@@ -169,18 +181,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Comment>
      */
@@ -254,6 +254,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $trick->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activationToken;
+    }
+
+    public function setActivationToken(?string $activationToken): self
+    {
+        $this->activationToken = $activationToken;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
+
+    public function isIsActivated(): ?bool
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated(bool $isActivated): self
+    {
+        $this->isActivated = $isActivated;
+
+        return $this;
+    }
+
+    public function getActivationTokenCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->activationTokenCreatedAt;
+    }
+
+    public function setActivationTokenCreatedAt(\DateTimeImmutable $activationTokenCreatedAt): self
+    {
+        $this->activationTokenCreatedAt = $activationTokenCreatedAt;
+
+        return $this;
+    }
+
+    public function getResetTokenCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->resetTokenCreatedAt;
+    }
+
+    public function setResetTokenCreatedAt(?\DateTimeImmutable $resetTokenCreatedAt): self
+    {
+        $this->resetTokenCreatedAt = $resetTokenCreatedAt;
 
         return $this;
     }
