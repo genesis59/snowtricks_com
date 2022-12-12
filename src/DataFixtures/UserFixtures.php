@@ -5,13 +5,21 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
 
 class UserFixtures extends Fixture
 {
+    public function __construct(
+        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly TokenGeneratorInterface $tokenGenerator
+    ) {
+    }
+
     public function load(ObjectManager $manager): void
     {
-        // mdp: testtest
+        // mdp: testtest faire la génération
         $userData = [
             ['bunny', 'bunny@google.com'],
             ['lion', 'lion@google.com'],
@@ -24,10 +32,11 @@ class UserFixtures extends Fixture
             $user = new User();
             $user->setName($userData[$i - 1][0]);
             $user->setEmail($userData[$i - 1][1]);
-            $user->setPassword(
-                '$argon2i$v=19$m=65536,t=4,p=1$ckxBTVpUdGVzTngzN3hCbg$hGt7lkQw2dsF9dsskfu0TYC17JyT5fiIB9ddz0FTMSA'
-            );
+            $user->setPassword($this->passwordHasher->hashPassword($user, 'Testtest1.'));
             $user->setCreatedAt(new \DateTimeImmutable());
+            $user->setActivationToken($this->tokenGenerator->generateToken());
+            $user->setActivationTokenCreatedAt(new \DateTimeImmutable());
+            $user->setIsActivated(true);
             $user->setUuid(Uuid::v4());
             $manager->persist($user);
             $this->addReference('user' . $i, $user);
