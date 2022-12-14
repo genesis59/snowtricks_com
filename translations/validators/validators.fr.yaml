@@ -1,0 +1,8 @@
+user:
+  password:
+    message: Le mot de passe n'est pas valide. Il doit comporter au moins 8 caractères dont 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial (-.,?;:§+!*$@%_).
+  name:
+    not_unique: Cette valeur existe déjà.
+  email:
+    not_unique: Cette valeur existe déjà.
+    bad_format: Cette valeur n''est pas une adresse email valide.

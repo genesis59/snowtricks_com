@@ -2,6 +2,7 @@ snow_trick:
   title:
     login: Se connecter!
     home: Bienvenue sur XtremSnowTricks!
+
   register:
     main: S'inscrire
     name: Nom
@@ -9,19 +10,23 @@ snow_trick:
     password: Mot de passe
     repeat_password: Confirmer le mot de passe
     button_submit: Valider
+
   forgotten:
     main: Mot de passe oublié ?
     button_submit: Valider
     email: Votre email
+
   new_activation:
       main: Recevoir un email pour l'activation de votre compte ?
       button_submit: Valider
       email: Votre email
+
   reset:
     main: Réinitialisation du mot de passe
     password: Nouveau mot de passe
     repeat_password: Confirmer le nouveau mot de passe
     button_submit: Valider
+
   login:
     main: Se connecter
     email: Votre email
@@ -33,44 +38,15 @@ snow_trick:
     error:
       activation: Votre compte n'a pas encore été activé.
       new_activation_message: Je veux recevoir un nouveau lien d'activation.
+
   header:
     image:
       alt: photo d'un snowboarder
     title: Partage ton style
+
   navbar:
     home: Accueil
     tricks: Ajouter une figure
     in: Se connecter
     out: Se déconnecter
     up: S'inscrire
-  flashes:
-    success:
-      register: Inscription réussie! Un message d'activation a été envoyé à votre adresse email.
-      forgotten: Un email contenant un lien de réinitialisation du mot de passe a été envoyé.
-      activation: Votre compte a bien été activé. Il ne reste plus qu'à vous connecter.
-      reset: Le mot de passe a bien été réinitialisé.
-      new_activation: Un email contenant un lien d''activation a été envoyé.
-    error:
-      reset: La réinitialisation a rencontrée un problème. Veuillez réessayer.
-      forgotten: Adresse email invalides.
-      forgotten_time: Le jeton d'activation est expiré.
-      activation: L'activation a rencontrée un problème. Veuillez réessayer.
-      activation_time: Le jeton de réinitialisation est expiré.
-      new_activation: Adresse email invalides.
-  email:
-    base_button: Allez à l'accueil
-    activation:
-      subject: XtremSnowTricks, Activation de votre compte
-      title: Activation du compte
-      content_1: Merci pour votre inscription,
-      content_2: cliquez
-      content_3: ici
-      content_4: pour finaliser votre inscription.
-      content_5: À bientôt sur XtremSnowTricks.
-    forgotten:
-      subject: XtremSnowTricks, Mot de passe oublié
-      title: Mot de passe oublié, XtremSnowTricks
-      content_1: Cliquez
-      content_2: ici
-      content_3: , pour réinitialiser votre mot de passe.
-      content_4: À bientôt sur XtremSnowTricks.

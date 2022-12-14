@@ -42,12 +42,12 @@ class UserCreateController extends AbstractController
             $managerRegistry->getManager()->flush();
 
             $mailerService->sendEmail(
-                $translator->trans('snow_trick.email.activation.subject'),
+                $translator->trans('activation.subject', [], 'emails'),
                 $user,
                 'activation'
             )
             ;
-            $this->addFlash('success', $translator->trans('snow_trick.flashes.success.register'));
+            $this->addFlash('success', $translator->trans('success.register', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
         return $this->render('user/user_create/index.html.twig', [

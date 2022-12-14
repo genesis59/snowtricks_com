@@ -28,18 +28,18 @@ class UserActivationController extends AbstractController
             ->findOneBy(['activationToken' => $token]);
 
         if ($user == null) {
-            $this->addFlash('danger', $translator->trans('snow_trick.flashes.error.activation'));
+            $this->addFlash('danger', $translator->trans('error.activation', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
 
         if ($user->getActivationTokenCreatedAt()->diff(new \DateTimeImmutable())->days >= 1) {
-            $this->addFlash('danger', $translator->trans('snow_trick.flashes.error.activation_time'));
+            $this->addFlash('danger', $translator->trans('error.activation_time', [], 'flashes'));
             return $this->redirectToRoute('app_user_new_activation');
         }
 
         $user->setIsActivated(true);
         $managerRegistry->getManager()->flush();
-        $this->addFlash('success', $translator->trans('snow_trick.flashes.success.activation'));
+        $this->addFlash('success', $translator->trans('success.activation', [], 'flashes'));
         return $this->redirectToRoute('app_login');
     }
 }
