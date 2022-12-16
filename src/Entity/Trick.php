@@ -7,7 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[UniqueEntity(fields: ['name'], message: 'validators.unique')]
+#[UniqueEntity(fields: ['slug'], message: 'validators.unique')]
 #[ORM\Entity(repositoryClass: TrickRepository::class)]
 class Trick
 {
@@ -17,12 +21,15 @@ class Trick
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Length(min:2, max:255, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Length(min:2, max:255, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:10, max:6000, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
     private ?string $description = null;
 
     #[ORM\Column]
