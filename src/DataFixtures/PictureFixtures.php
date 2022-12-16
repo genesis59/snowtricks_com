@@ -20,7 +20,12 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
             'mfm-butter-180.jpg',
             'board-slide.jpg',
             'japan-air.jpg',
-            'indy-grab.jpg'
+            'indy-grab.jpg',
+            'tail-press.jpg',
+            'backside-180.jpg',
+            'tripod.jpg',
+            'lip-slide.jpg',
+            'fs-tail-slide.jpg'
         ];
         for ($i = 1; $i <= count($pictureData); $i++) {
             /** @var Trick $trick */

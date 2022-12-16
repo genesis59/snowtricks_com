@@ -30,11 +30,11 @@ class UserResetPasswordController extends AbstractController
             ->getRepository(User::class)
             ->findOneBy(['resetToken' => $token]);
         if ($user === null) {
-            $this->addFlash('danger', $translator->trans('snow_trick.flashes.error.reset'));
+            $this->addFlash('danger', $translator->trans('error.reset', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
         if ($user->getResetTokenCreatedAt()->diff(new \DateTimeImmutable())->days >= 1) {
-            $this->addFlash('danger', $translator->trans('snow_trick.flashes.error.forgotten_time'));
+            $this->addFlash('danger', $translator->trans('error.forgotten_time', [], 'flashes'));
             return $this->redirectToRoute('app_login');
         }
         $form = $this->createForm(ResetPasswordType::class, $user);
@@ -42,7 +42,7 @@ class UserResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($passwordHasher->hashPassword($user, $form->getData()->getPassword()));
             $managerRegistry->getManager()->flush();
-            $this->addFlash('success', $translator->trans('snow_trick.flashes.success.reset'));
+            $this->addFlash('success', $translator->trans('success.reset', [], 'flashes'));
             return $this->redirectToRoute('app_login');
         }
         return $this->render('user/user_reset_password/index.html.twig', [

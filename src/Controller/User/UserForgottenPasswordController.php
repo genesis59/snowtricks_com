@@ -37,7 +37,7 @@ class UserForgottenPasswordController extends AbstractController
                 ->findOneBy(['email' => $form->getData()['email']]);
 
             if ($user == null) {
-                $this->addFlash('danger', $translator->trans('snow_trick.flashes.error.forgotten'));
+                $this->addFlash('danger', $translator->trans('error.forgotten', [], 'flashes'));
                 return $this->redirectToRoute('app_user_forgotten_password');
             }
 
@@ -45,11 +45,11 @@ class UserForgottenPasswordController extends AbstractController
             $user->setResetTokenCreatedAt(new \DateTimeImmutable());
             $managerRegistry->getManager()->flush();
             $mailerService->sendEmail(
-                $translator->trans('snow_trick.email.forgotten.subject'),
+                $translator->trans('forgotten.subject', [], 'emails'),
                 $user,
                 'forgotten_password'
             );
-            $this->addFlash('success', $translator->trans('snow_trick.flashes.success.forgotten'));
+            $this->addFlash('success', $translator->trans('success.forgotten', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
 

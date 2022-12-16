@@ -1,0 +1,16 @@
+base_button: Allez à l'accueil
+activation:
+  subject: XtremSnowTricks, Activation de votre compte
+  title: Activation du compte
+  content_1: Merci pour votre inscription,
+  content_2: cliquez
+  content_3: ici
+  content_4: pour finaliser votre inscription.
+  content_5: À bientôt sur XtremSnowTricks.
+forgotten:
+  subject: XtremSnowTricks, Mot de passe oublié
+  title: Mot de passe oublié, XtremSnowTricks
+  content_1: Cliquez
+  content_2: ici
+  content_3: , pour réinitialiser votre mot de passe.
+  content_4: À bientôt sur XtremSnowTricks.

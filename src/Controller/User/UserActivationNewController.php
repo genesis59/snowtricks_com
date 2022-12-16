@@ -38,7 +38,7 @@ class UserActivationNewController extends AbstractController
                 ->findOneBy(['email' => $form->getData()['email']]);
 
             if ($user == null || $user->isIsActivated()) {
-                $this->addFlash('danger', $translator->trans('snow_trick.flashes.error.new_activation'));
+                $this->addFlash('danger', $translator->trans('error.new_activation', [], 'flashes'));
                 return $this->redirectToRoute('app_user_new_activation');
             }
 
@@ -46,12 +46,12 @@ class UserActivationNewController extends AbstractController
             $user->setActivationTokenCreatedAt(new \DateTimeImmutable());
             $managerRegistry->getManager()->flush();
             $mailerService->sendEmail(
-                $translator->trans('snow_trick.email.activation.subject'),
+                $translator->trans('activation.subject', [], 'emails'),
                 $user,
                 'activation'
             )
             ;
-            $this->addFlash('success', $translator->trans('snow_trick.flashes.success.new_activation'));
+            $this->addFlash('success', $translator->trans('success.new_activation', [], 'flashes'));
             return $this->redirectToRoute('app_login');
         }
         return $this->render('user/user_activation_new/index.html.twig', [
