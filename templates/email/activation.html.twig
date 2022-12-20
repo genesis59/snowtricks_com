@@ -7,12 +7,8 @@
     </p>
     <p>
         {% trans from "emails" %}activation.content_2{% endtrans %}
-        <a href="{{  url('app_user_activation',{'token': user.activationToken}) }}">
-            {% trans from "emails" %}activation.content_3{% endtrans %}
-        </a>
-        {% trans from "emails" %}activation.content_4{% endtrans %}
     </p>
-    <p>
-        {% trans from "emails" %}activation.content_5{% endtrans %}
-    </p>
+{% endblock %}
+{% block button %}
+<a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="{{ sign_url }}">{% trans from "emails"%}activation.base_button{% endtrans %}</a>
 {% endblock %}

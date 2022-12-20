@@ -20,6 +20,7 @@ class Comment
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min:2, max:1500, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
+    #[Assert\NotBlank(message: 'validators.not_blank')]
     private ?string $content = null;
 
     #[ORM\Column]

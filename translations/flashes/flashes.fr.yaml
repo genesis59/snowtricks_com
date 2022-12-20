@@ -10,4 +10,6 @@ error:
   forgotten_time: Le jeton d'activation est expiré.
   activation: L'activation a rencontrée un problème. Veuillez réessayer.
   activation_time: Le jeton de réinitialisation est expiré.
+  activation_token: Vous êtes un filou mais, ça ne passe pas ici!
+  already_activation: Votre compte est déjà activé.
   new_activation: Adresse email invalides.

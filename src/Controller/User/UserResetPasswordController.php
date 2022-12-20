@@ -4,10 +4,11 @@ namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Form\ResetPasswordType;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\UriSigner;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -18,17 +19,21 @@ class UserResetPasswordController extends AbstractController
     public function __invoke(
         string $token,
         Request $request,
-        ManagerRegistry $managerRegistry,
+        UserRepository $userRepository,
         TranslatorInterface $translator,
-        UserPasswordHasherInterface $passwordHasher
+        UserPasswordHasherInterface $passwordHasher,
+        UriSigner $uriSigner
     ): Response {
+
+        if (!$uriSigner->checkRequest($request)) {
+            $this->addFlash('danger', $translator->trans('error.activation_token', [], 'flashes'));
+            return $this->redirectToRoute('home');
+        }
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
         }
 
-        $user = $managerRegistry
-            ->getRepository(User::class)
-            ->findOneBy(['resetToken' => $token]);
+        $user = $userRepository->findOneBy(['resetToken' => $token]);
         if ($user === null) {
             $this->addFlash('danger', $translator->trans('error.reset', [], 'flashes'));
             return $this->redirectToRoute('home');
@@ -41,7 +46,7 @@ class UserResetPasswordController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($passwordHasher->hashPassword($user, $form->getData()->getPassword()));
-            $managerRegistry->getManager()->flush();
+            $userRepository->save($user, true);
             $this->addFlash('success', $translator->trans('success.reset', [], 'flashes'));
             return $this->redirectToRoute('app_login');
         }

@@ -5,12 +5,13 @@ namespace App\Controller\User;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Mailer\MailerService;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -20,7 +21,7 @@ class UserCreateController extends AbstractController
     #[Route('/utilisateur/inscription', name: 'app_user_create')]
     public function __invoke(
         Request $request,
-        ManagerRegistry $managerRegistry,
+        UserRepository $userRepository,
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface $translator,
         TokenGeneratorInterface $tokenGenerator,
@@ -31,6 +32,7 @@ class UserCreateController extends AbstractController
         }
         $user = new User();
         $form = $this->createForm(UserFormType::class, $user);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setUuid(Uuid::v4());
@@ -38,15 +40,22 @@ class UserCreateController extends AbstractController
             $user->setCreatedAt(new \DateTimeImmutable());
             $user->setActivationToken($tokenGenerator->generateToken());
             $user->setActivationTokenCreatedAt(new \DateTimeImmutable());
-            $managerRegistry->getManager()->persist($user);
-            $managerRegistry->getManager()->flush();
+            $userRepository->save($user, true);
 
             $mailerService->sendEmail(
                 $translator->trans('activation.subject', [], 'emails'),
-                $user,
+                [
+                    'user' => $user,
+                    'url' => $this->generateUrl(
+                        'app_user_activation',
+                        [
+                            'token' => $user->getActivationToken()
+                        ],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    )
+                ],
                 'activation'
-            )
-            ;
+            );
             $this->addFlash('success', $translator->trans('success.register', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
