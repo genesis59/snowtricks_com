@@ -42,10 +42,10 @@ class UserResetPasswordController extends AbstractController
             $this->addFlash('danger', $translator->trans('error.forgotten_time', [], 'flashes'));
             return $this->redirectToRoute('app_login');
         }
-        $form = $this->createForm(ResetPasswordType::class, $user);
+        $form = $this->createForm(ResetPasswordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($passwordHasher->hashPassword($user, $form->getData()->getPassword()));
+            $user->setPassword($passwordHasher->hashPassword($user, $form->getData()['password']));
             $userRepository->save($user, true);
             $this->addFlash('success', $translator->trans('success.reset', [], 'flashes'));
             return $this->redirectToRoute('app_login');

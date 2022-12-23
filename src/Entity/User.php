@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotCompromisedPassword]
+    #[Assert\NotCompromisedPassword(message: 'validators.not_compromised_password')]
     #[Assert\Regex(
         pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-.,?;:§+!*$@%_])([-.,?;:§+!*$@%_\w]{8,})$/',
         message: 'validators.regex.password'
