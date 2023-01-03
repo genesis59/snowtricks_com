@@ -15,6 +15,7 @@ class HomeController extends AbstractController
         $tricks = $trickRepository->findAll();
         return $this->render('home/index.html.twig', [
             'tricks' => $tricks,
+            'add_header' => true,
             'fix_footer' => false
         ]);
     }

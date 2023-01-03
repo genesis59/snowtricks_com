@@ -1,0 +1,39 @@
+.box-header {
+    background: url("../../../public/images/header.jpg") center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.catchphrase-box-header {
+    position: relative;
+    font-family: 'Snowboarding', sans-serif;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-color-apple);
+    width: 70vw;
+    line-height: 87px;
+}
+
+.catchphrase-box-header-fs-jp {
+    font-family: "Noto Serif CJK JP", sans-serif;
+    font-size: 55px;
+}
+
+.catchphrase-box-header-fs-base {
+    font-size: 144px;
+}
+
+.catchphrase-box-header p {
+    margin: 0;
+}
+
+@media screen and (min-height: 1080px) {
+    .catchphrase-box-header-fs-base {
+        font-size: 233px;
+    }
+}

@@ -26,7 +26,7 @@ class UserResetPasswordController extends AbstractController
     ): Response {
 
         if (!$uriSigner->checkRequest($request)) {
-            $this->addFlash('danger', $translator->trans('error.activation_token', [], 'flashes'));
+            $this->addFlash('danger', $translator->trans('flashes.error.invalid_token', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
         if ($this->getUser()) {
@@ -35,23 +35,23 @@ class UserResetPasswordController extends AbstractController
 
         $user = $userRepository->findOneBy(['resetToken' => $token]);
         if ($user === null) {
-            $this->addFlash('danger', $translator->trans('error.reset', [], 'flashes'));
+            $this->addFlash('danger', $translator->trans('flashes.error.reset', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
         if ($user->getResetTokenCreatedAt()->diff(new \DateTimeImmutable())->days >= 1) {
-            $this->addFlash('danger', $translator->trans('error.forgotten_time', [], 'flashes'));
-            return $this->redirectToRoute('app_login');
+            $this->addFlash('danger', $translator->trans('flashes.error.forgotten_time', [], 'flashes'));
+            return $this->redirectToRoute('app_user_forgotten_password');
         }
         $form = $this->createForm(ResetPasswordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($passwordHasher->hashPassword($user, $form->getData()['password']));
-            $userRepository->save($user, true);
-            $this->addFlash('success', $translator->trans('success.reset', [], 'flashes'));
-            return $this->redirectToRoute('app_login');
+            $userRepository->upgradePassword($user, $passwordHasher->hashPassword($user, $form->getData()['password']));
+            $this->addFlash('success', $translator->trans('flashes.success.reset', [], 'flashes'));
+            return $this->redirectToRoute('home');
         }
         return $this->render('user/user_reset_password/index.html.twig', [
             'form' => $form->createView(),
+            'add_header' => false,
             'fix_footer' => true
         ]);
     }

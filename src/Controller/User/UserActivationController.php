@@ -18,14 +18,13 @@ class UserActivationController extends AbstractController
     public function __invoke(
         string $token,
         UserRepository $userRepository,
-        ManagerRegistry $managerRegistry,
         TranslatorInterface $translator,
         UriSigner $uriSigner,
         Request $request
     ): Response {
 
         if (!$uriSigner->checkRequest($request)) {
-            $this->addFlash('danger', $translator->trans('error.activation_token', [], 'flashes'));
+            $this->addFlash('danger', $translator->trans('flashes.error.invalid_token', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
         if ($this->getUser()) {
@@ -33,28 +32,24 @@ class UserActivationController extends AbstractController
         }
 
         /** @var User $user */
-        $user = $managerRegistry->getManager()
-            ->getRepository(User::class)
-            ->findOneBy(['activationToken' => $token]);
+        $user = $userRepository->findOneBy(['activationToken' => $token]);
 
         if ($user == null) {
-            $this->addFlash('danger', $translator->trans('error.activation', [], 'flashes'));
+            $this->addFlash('danger', $translator->trans('flashes.error.activation', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
 
         if ($user->isIsActivated()) {
-            $this->addFlash('info', $translator->trans('error.already_activation', [], 'flashes'));
+            $this->addFlash('info', $translator->trans('flashes.error.already_activation', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
 
         if ($user->getActivationTokenCreatedAt()->diff(new \DateTimeImmutable())->days >= 1) {
-            $this->addFlash('danger', $translator->trans('error.activation_time', [], 'flashes'));
+            $this->addFlash('danger', $translator->trans('flashes.error.activation_time', [], 'flashes'));
             return $this->redirectToRoute('app_user_new_activation');
         }
-
-        $user->setIsActivated(true);
-        $userRepository->save($user, true);
-        $this->addFlash('success', $translator->trans('success.activation', [], 'flashes'));
-        return $this->redirectToRoute('app_login');
+        $userRepository->activate($user);
+        $this->addFlash('success', $translator->trans('flashes.success.activation', [], 'flashes'));
+        return $this->redirectToRoute('home');
     }
 }

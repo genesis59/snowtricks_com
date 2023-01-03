@@ -1,0 +1,9 @@
+@media screen and (min-height: 1080px) {
+    .login-container h1 {
+        font-size: 3rem;
+    }
+
+    .login-container label, .login-container button, .login-container .error, .login-container .already, .login-container input {
+        font-size: 1.5rem;
+    }
+}

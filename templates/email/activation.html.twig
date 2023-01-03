@@ -1,14 +1,14 @@
 {% extends 'email/base_email.html.twig' %}
 
-{% block title %}{% trans from "emails" %}activation.title{% endtrans %}{% endblock %}
+{% block title %}{% trans from "emails" %}email.activation.title{% endtrans %}{% endblock %}
 {% block content %}
     <p>
-        {% trans from "emails" %}activation.content_1{% endtrans %}
+        {% trans from "emails" %}email.activation.content_1{% endtrans %}
     </p>
     <p>
-        {% trans from "emails" %}activation.content_2{% endtrans %}
+        {% trans from "emails" %}email.activation.content_2{% endtrans %}
     </p>
 {% endblock %}
 {% block button %}
-<a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="{{ sign_url }}">{% trans from "emails"%}activation.base_button{% endtrans %}</a>
+<a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="{{ sign_url }}">{% trans from "emails"%}email.activation.base_button{% endtrans %}</a>
 {% endblock %}

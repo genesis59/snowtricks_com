@@ -1,15 +1,17 @@
-success:
-  register: Inscription réussie! Un message d'activation a été envoyé à votre adresse email.
-  forgotten: Un email contenant un lien de réinitialisation du mot de passe a été envoyé.
-  activation: Votre compte a bien été activé. Il ne reste plus qu'à vous connecter.
-  reset: Le mot de passe a bien été réinitialisé.
-  new_activation: Un email contenant un lien d''activation a été envoyé.
-error:
-  reset: La réinitialisation a rencontrée un problème. Veuillez réessayer.
-  forgotten: Adresse email invalides.
-  forgotten_time: Le jeton d'activation est expiré.
-  activation: L'activation a rencontrée un problème. Veuillez réessayer.
-  activation_time: Le jeton de réinitialisation est expiré.
-  activation_token: Vous êtes un filou mais, ça ne passe pas ici!
-  already_activation: Votre compte est déjà activé.
-  new_activation: Adresse email invalides.
+flashes:
+  success:
+    register: Inscription réussie! Un message d'activation a été envoyé à votre adresse email.
+    forgotten: Un email contenant un lien de réinitialisation du mot de passe a été envoyé.
+    activation: Votre compte a bien été activé. Il ne reste plus qu'à vous connecter.
+    reset: Le mot de passe a bien été réinitialisé.
+    new_activation: Un email contenant un lien d'activation a été envoyé.
+  error:
+    reset: La réinitialisation a rencontrée un problème. Veuillez réessayer.
+    forgotten_not_activation: Désolé votre compte n'est pas encore actif. Veuillez renseigner votre adresse email pour recevoir un email d'activation.
+    forgotten: Adresse email invalide.
+    forgotten_time: votre lien de réinitialisation de mot de passe est arrivé à expiration. Veuillez renseigner votre adresse email pour en recevoir un nouveau.
+    activation: L'activation a rencontrée un problème. Veuillez réessayer.
+    activation_time: votre lien d'activation de compte est arrivé à expiration. Veuillez renseigner votre adresse email pour en recevoir un nouveau.
+    invalid_token: Désolé, le lien utilisé est corrompu.
+    already_activation: Votre compte est déjà activé.
+    new_activation: Adresse email invalide.

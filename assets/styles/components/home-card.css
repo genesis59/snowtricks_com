@@ -1,0 +1,9 @@
+@media screen and (min-height: 1080px) {
+    .card-title {
+        font-size: 2rem;
+    }
+
+    .card-body img {
+        width: 36px;
+    }
+}

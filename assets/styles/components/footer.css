@@ -1,0 +1,9 @@
+.footer {
+    background-color: var(--theme-color-dark-dark-blue);
+}
+
+@media screen and (min-height: 1080px) {
+    .footer {
+        display: none;
+    }
+}

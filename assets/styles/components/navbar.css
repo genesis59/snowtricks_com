@@ -1,0 +1,9 @@
+.navbar-bg-custom {
+    background-color: var(--theme-color-dark-dark-blue);
+}
+
+@media screen and (min-height: 1080px) {
+    .navbar-bg-custom {
+        display: none;
+    }
+}

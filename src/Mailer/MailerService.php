@@ -29,7 +29,7 @@ class MailerService
         $signUrl = $this->uriSigner->sign($context['url']);
         $email = (new TemplatedEmail())
             ->from($context["user"]->getEmail())
-            ->to('you@example.com')
+            ->to('me@example.com')
             ->subject($subject)
             ->htmlTemplate('email/' . $template . '.html.twig')
             ->context([

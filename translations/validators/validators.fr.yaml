@@ -1,6 +1,6 @@
 validators:
   unique: Cette valeur existe déjà.
-  not_blank: Ce champ ne doit pas être vide.llll
+  not_blank: Ce champ ne doit pas être vide.
   not_compromised_password: Ce mot de passe a été divulgué lors d'une fuite de données, il ne doit plus être utilisé. Veuillez utiliser un autre mot de passe.
   length:
     min: Cette chaîne est trop courte. Elle doit avoir au minimum {{ limit }} caractère.|Cette chaîne est trop courte. Elle doit avoir au minimum {{ limit }} caractères.
