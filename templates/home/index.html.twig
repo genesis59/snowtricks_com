@@ -4,10 +4,13 @@
 
 {% block body %}
     <div class="container-fluid">
-        <div class="row m-5">
+        <div class="row m-5" id="tricks-list">
             {% for trick in tricks %}
-                {{  include('home/_home.html.twig') }}
+                {{ include('home/_home.html.twig') }}
             {% endfor %}
         </div>
+        {% if page < page_max %}
+            {{ include('home/_loader.html.twig') }}
+        {% endif %}
     </div>
 {% endblock %}
