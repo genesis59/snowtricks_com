@@ -39,3 +39,8 @@ li {
 .height-div-screen-80 {
     height: 80vh;
 }
+
+a {
+    text-decoration: none;
+    color: var(--theme-color-light-blue);
+}

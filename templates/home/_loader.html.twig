@@ -1,3 +1,7 @@
 <div class="text-center">
-    <a class="btn btn-lg btn-primary" href="{{ path('home') }}?page={{ page + 1 }}#tricks-list">Charger plus</a>
+    {% if page < page_max %}
+        <a class="btn btn-lg btn-primary" href="{{ path('home') }}?page={{ page + 1 }}#tricks-loader">Charger plus</a>
+    {% else %}
+        <button class="btn btn-lg btn-primary" href="#" disabled="disabled">FIN</button>
+    {% endif %}
 </div>

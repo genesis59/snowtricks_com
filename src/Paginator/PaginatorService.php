@@ -8,10 +8,12 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class PaginatorService
 {
+    private int $trickPerPage;
     public function __construct(
         private readonly TrickRepository $trickRepository,
         private readonly ParameterBagInterface $parameterBag,
     ) {
+        $this->trickPerPage = intval($this->parameterBag->get('trick_per_page'));
     }
 
     /**
@@ -20,14 +22,14 @@ class PaginatorService
      */
     public function paginateTrick(mixed $page): array
     {
-        $limit = intval($this->parameterBag->get('trickPerPage')) * intval($page);
+        $limit = $this->trickPerPage * intval($page);
         return $this->trickRepository->findBy([], null, $limit);
     }
 
     public function trickPageMax(): int
     {
-        if (intval($this->parameterBag->get('trickPerPage')) !== 0) {
-            return intval(ceil($this->trickRepository->count([]) / intval($this->parameterBag->get('trickPerPage'))));
+        if ($this->trickPerPage !== 0) {
+            return intval(ceil($this->trickRepository->count([]) / $this->trickPerPage));
         }
         return 1;
     }
