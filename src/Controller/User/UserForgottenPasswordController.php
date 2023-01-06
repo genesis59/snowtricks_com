@@ -3,10 +3,12 @@
 namespace App\Controller\User;
 
 use App\Entity\User;
+use App\Event\UserEmailEvent;
 use App\Form\ForgottenPasswordType;
 use App\Mailer\MailerService;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +20,11 @@ class UserForgottenPasswordController extends AbstractController
     #[Route('/utilisateur/mot-de-passe-oublié', name: 'app_user_forgotten_password')]
     public function __invoke(
         Request $request,
-        ManagerRegistry $managerRegistry,
+        UserRepository $userRepository,
         TokenGeneratorInterface $tokenGenerator,
         MailerService $mailerService,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        EventDispatcherInterface $dispatcher
     ): Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
@@ -32,29 +35,25 @@ class UserForgottenPasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
-            $user = $managerRegistry
-                ->getRepository(User::class)
-                ->findOneBy(['email' => $form->getData()['email']]);
-
+            $user = $userRepository->findOneBy(['email' => $form->getData()['email']]);
             if ($user == null) {
-                $this->addFlash('danger', $translator->trans('error.forgotten', [], 'flashes'));
+                $this->addFlash('danger', $translator->trans('flashes.error.forgotten', [], 'flashes'));
                 return $this->redirectToRoute('app_user_forgotten_password');
             }
+            if (!$user->isIsActivated()) {
+                $this->addFlash('danger', $translator->trans('flashes.error.forgotten_not_activation', [], 'flashes'));
+                return $this->redirectToRoute('app_user_new_activation');
+            }
 
-            $user->setResetToken($tokenGenerator->generateToken());
-            $user->setResetTokenCreatedAt(new \DateTimeImmutable());
-            $managerRegistry->getManager()->flush();
-            $mailerService->sendEmail(
-                $translator->trans('forgotten.subject', [], 'emails'),
-                $user,
-                'forgotten_password'
-            );
-            $this->addFlash('success', $translator->trans('success.forgotten', [], 'flashes'));
+            $userRepository->createResetPasswordToken($user, $tokenGenerator->generateToken());
+            $dispatcher->dispatch(new UserEmailEvent($user), UserEmailEvent::RESET_EMAIL);
+            $this->addFlash('success', $translator->trans('flashes.success.forgotten', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
 
         return $this->render('user/user_forgotten_password/index.html.twig', [
             'form' => $form->createView(),
+            'add_header' => false,
             'fix_footer' => true
         ]);
     }

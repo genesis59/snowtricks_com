@@ -16,7 +16,7 @@
 </head>
 <body>
 {% include '_navbar.html.twig' %}
-{% if app.request.pathInfo == "/" %}
+{% if add_header == true %}
     {% include '_header.html.twig' %}
 {% endif %}
 {% for key,messages in app.flashes %}

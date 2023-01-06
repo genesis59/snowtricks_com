@@ -1,16 +1,13 @@
-{% set cardImage = "default.jpg" %}
-{% for picture in trick.picture %}
-    {% if picture.isMain %}
-        {% set cardImage = picture.fileName %}
-    {% endif %}
-{% endfor %}
+{% import 'macro/_get_trick_card_picture.html.twig' as macro %}
 <div class="col-12 col-lg-3 my-3 text-center">
     <div class="card">
-        <img src="{{ asset('images/picture/' ~ cardImage ) }}" class="card-img-top" alt="...">
+        <a href="{{ path('app_trick',{slug:trick.slug}) }}"><img src="{{ asset('images/picture/' ~ macro.getCardPicture(trick)| trim) }}" class="card-img-top" alt="{% trans with {'%name%': trick.name} %}snow_trick.home.alt.image_trick{% endtrans %}"></a>
         <div class="d-flex card-body justify-content-around align-content-center">
-            <div>
-                <h5 class="card-title">{{ trick.name }}</h5>
-            </div>
+            <a href="{{ path('app_trick',{slug:trick.slug}) }}">
+                <div>
+                    <h5 class="card-title">{{ trick.name }}</h5>
+                </div>
+            </a>
             <div>
                 <img src="{{ asset('images/pencil.png') }}" alt="">
             </div>

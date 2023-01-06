@@ -21,19 +21,19 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof User) {
             return;
         }
-    }
-
-    public function checkPostAuth(UserInterface $user): void
-    {
-        if (!$user instanceof User) {
-            return;
-        }
         if (!$user->isIsActivated()) {
             throw new CustomUserMessageAccountStatusException(
                 $this->translator->trans('snow_trick.login.error.activation'),
                 [],
                 100
             );
+        }
+    }
+
+    public function checkPostAuth(UserInterface $user): void
+    {
+        if (!$user instanceof User) {
+            return;
         }
     }
 }

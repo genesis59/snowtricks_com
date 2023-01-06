@@ -26,10 +26,12 @@ class Trick
 
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\Length(min:2, max:255, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
+    #[Assert\NotBlank(message: 'validators.not_blank')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min:10, max:6000, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
+    #[Assert\NotBlank(message: 'validators.not_blank')]
     private ?string $description = null;
 
     #[ORM\Column]

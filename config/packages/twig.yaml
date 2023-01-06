@@ -1,7 +1,10 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_5_layout.html.twig']
-
+    globals:
+        default_picture: '%default_picture%'
+        arrow_page_up_on: '%arrow_page_up_on%'
+        trick_per_page: '%trick_per_page%'
 when@test:
     twig:
         strict_variables: true

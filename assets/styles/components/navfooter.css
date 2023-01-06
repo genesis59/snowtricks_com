@@ -1,0 +1,20 @@
+.navfooter {
+    display: none;
+}
+
+@media screen and (min-height: 1080px) {
+    .navfooter {
+        border-top: 2px solid black;
+        padding: 20px 80px;
+        color: white;
+        justify-content: space-around;
+        align-items: center;
+        display: flex;
+        height: 100px;
+    }
+
+    .navfooter img {
+        width: 48px;
+    }
+}
+

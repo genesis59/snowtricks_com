@@ -1,4 +1,14 @@
 snow_trick:
+  home:
+    alt:
+      image_trick: Image de la figure %name%
+  trick:
+    alt:
+      image_trick: Image de la figure %name%
+  arrow_page_down:
+    alt: Flèche de raccourci vers le haut de la liste des figures
+  arrow_page_up:
+    alt: Flèche de raccourci vers le haut de la liste des figures
   title:
     login: Se connecter!
     home: Bienvenue sur XtremSnowTricks!
@@ -50,3 +60,13 @@ snow_trick:
     in: Se connecter
     out: Se déconnecter
     up: S'inscrire
+
+  navbar_footer:
+    icon_in:
+      alt: Icône se connecter
+    icon_out:
+      alt: Icône se déconnecter
+    icon_signet:
+      alt: Icône ajout d'une figure
+    icon_home:
+      alt: Icône aller à l'accueil

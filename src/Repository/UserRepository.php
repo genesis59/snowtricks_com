@@ -56,6 +56,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+    public function activate(User $user): void
+    {
+        $user->setIsActivated(true);
+        $this->save($user, true);
+    }
+
+    public function createActivationToken(User $user, string $token): void
+    {
+        $user->setActivationToken($token);
+        $user->setActivationTokenCreatedAt(new \DateTimeImmutable());
+        $this->save($user, true);
+    }
+
+    public function createResetPasswordToken(User $user, string $token): void
+    {
+        $user->setResetToken($token);
+        $user->setResetTokenCreatedAt(new \DateTimeImmutable());
+        $this->save($user, true);
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

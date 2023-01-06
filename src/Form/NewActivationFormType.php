@@ -7,6 +7,9 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NewActivationFormType extends AbstractType
@@ -18,6 +21,11 @@ class NewActivationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
+                'constraints' => [
+                    new Length(max:255, maxMessage: 'validators.length.max'),
+                    new Email(message: 'validators.email'),
+                    new NotBlank(message: 'validators.not_blank')
+                ],
                 'label_attr' => ['class' => 'mt-3'],
                 'label' => $this->translator->trans('snow_trick.new_activation.email'),
                 'attr' => [

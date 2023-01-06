@@ -4,10 +4,11 @@ namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Form\ResetPasswordType;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\UriSigner;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -18,35 +19,39 @@ class UserResetPasswordController extends AbstractController
     public function __invoke(
         string $token,
         Request $request,
-        ManagerRegistry $managerRegistry,
+        UserRepository $userRepository,
         TranslatorInterface $translator,
-        UserPasswordHasherInterface $passwordHasher
+        UserPasswordHasherInterface $passwordHasher,
+        UriSigner $uriSigner
     ): Response {
+
+        if (!$uriSigner->checkRequest($request)) {
+            $this->addFlash('danger', $translator->trans('flashes.error.invalid_token', [], 'flashes'));
+            return $this->redirectToRoute('home');
+        }
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
         }
 
-        $user = $managerRegistry
-            ->getRepository(User::class)
-            ->findOneBy(['resetToken' => $token]);
+        $user = $userRepository->findOneBy(['resetToken' => $token]);
         if ($user === null) {
-            $this->addFlash('danger', $translator->trans('error.reset', [], 'flashes'));
+            $this->addFlash('danger', $translator->trans('flashes.error.reset', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
         if ($user->getResetTokenCreatedAt()->diff(new \DateTimeImmutable())->days >= 1) {
-            $this->addFlash('danger', $translator->trans('error.forgotten_time', [], 'flashes'));
-            return $this->redirectToRoute('app_login');
+            $this->addFlash('danger', $translator->trans('flashes.error.forgotten_time', [], 'flashes'));
+            return $this->redirectToRoute('app_user_forgotten_password');
         }
-        $form = $this->createForm(ResetPasswordType::class, $user);
+        $form = $this->createForm(ResetPasswordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($passwordHasher->hashPassword($user, $form->getData()->getPassword()));
-            $managerRegistry->getManager()->flush();
-            $this->addFlash('success', $translator->trans('success.reset', [], 'flashes'));
-            return $this->redirectToRoute('app_login');
+            $userRepository->upgradePassword($user, $passwordHasher->hashPassword($user, $form->getData()['password']));
+            $this->addFlash('success', $translator->trans('flashes.success.reset', [], 'flashes'));
+            return $this->redirectToRoute('home');
         }
         return $this->render('user/user_reset_password/index.html.twig', [
             'form' => $form->createView(),
+            'add_header' => false,
             'fix_footer' => true
         ]);
     }

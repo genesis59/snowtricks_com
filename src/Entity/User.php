@@ -34,19 +34,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotCompromisedPassword(message: 'validators.not_compromised_password')]
     #[Assert\Regex(
         pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-.,?;:§+!*$@%_])([-.,?;:§+!*$@%_\w]{8,})$/',
-        message: 'validators.user.password'
+        message: 'validators.regex.password'
     )]
+    #[Assert\NotBlank(message: 'validators.not_blank')]
     private ?string $password = null;
 
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\Length(min:2, max:255, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i',
+        message: 'validators.regex.name'
+    )]
+    #[Assert\NotBlank(message: 'validators.not_blank')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\Length(max:255, maxMessage: 'validators.length.max')]
     #[Assert\Email(message: 'validators.email')]
+    #[Assert\NotBlank(message: 'validators.not_blank')]
     private ?string $email = null;
 
     #[ORM\Column]

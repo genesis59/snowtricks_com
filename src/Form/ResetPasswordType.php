@@ -8,6 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ResetPasswordType extends AbstractType
@@ -20,6 +23,14 @@ class ResetPasswordType extends AbstractType
         $builder
             ->add('password', RepeatedType::class, [
                 'first_options'  => [
+                    'constraints' => [
+                        new NotBlank(message:'validators.not_blank'),
+                        new NotCompromisedPassword(message: 'validators.not_compromised_password'),
+                        new Regex(
+                            pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-.,?;:§+!*$@%_])([-.,?;:§+!*$@%_\w]{8,})$/',
+                            message: 'validators.regex.password'
+                        )
+                    ],
                     'mapped' => false,
                     'label_attr' => ['class' => 'mt-3'],
                     'label' => $this->translator->trans('snow_trick.reset.password'),'attr' => [

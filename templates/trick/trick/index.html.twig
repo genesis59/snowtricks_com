@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+{% import 'macro/_get_trick_card_picture.html.twig' as macro %}
+
+{% block title %}Hello TrickController!{% endblock %}
+
+{% block body %}
+
+    <div class="trick-container">
+        <div class="trick-container-base">
+            <div class="trick-container-update">
+                UPDATE && DELETE
+            </div>
+            <div class="trick-container-image">
+                <span>{{ trick.name }}</span>
+                <img src="{{ asset('images/picture/' ~ macro.getCardPicture(trick)| trim) }}" alt="{% trans with {'%name%': trick.name} %}snow_trick.trick.alt.image_trick{% endtrans %}">
+            </div>
+            <div class="trick-container-content">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pharetra facilisis est tincidunt
+                mollis.
+                Donec quis ipsum viverra, luctus elit et, congue augue. Suspendisse id blandit lectus, nec vehicula
+                nisi.
+                Donec sit amet sem pretium, posuere metus ut, faucibus nisl. Etiam ut cursus est. Cras pretium justo
+                eget
+                turpis elementum lobortis. Nam malesuada purus vel risus fringilla vehicula. Pellentesque eget dictum
+                sem.
+                Aenean iaculis facilisis aliquet. Duis justo elit, ornare vel lorem sit amet, venenatis congue nunc. Sed
+                scelerisque bibendum auctor. Morbi varius, dui in laoreet pulvinar, leo tortor commodo orci, ac
+                dignissim
+                justo erat eget sem. Donec quis facilisis mauris, eget gravida velit.
+
+                Fusce tincidunt purus nec vehicula aliquam. Sed maximus euismod ex. Vestibulum vitae imperdiet sem, ac
+                congue lacus. Sed scelerisque est lacus, vitae accumsan lacus auctor ac. Nam vitae purus odio. Fusce
+                eget
+                egestas augue. Curabitur ultrices orci porta imperdiet ultricies. Nam nibh erat, porta at nibh a,
+                convallis
+                blandit mi. Nullam sed consectetur diam. Nam accumsan eget ligula sit amet tincidunt.
+
+                Nulla sodales ligula in nunc fermentum, vitae lacinia urna aliquet. Class aptent taciti sociosqu ad
+                litora
+                torquent per conubia nostra, per inceptos himenaeos. Fusce elementum euismod metus, et vulputate sapien
+                imperdiet quis. Fusce pretium est in odio commodo convallis. Aliquam erat volutpat. Vestibulum pretium,
+                turpis sed accumsan porta, dolor purus rhoncus massa, non condimentum ex enim eget dolor. Maecenas
+                tincidunt, erat non iaculis elementum, ligula ipsum bibendum dui, at sollicitudin ligula felis eget
+                sapien.
+                Nullam efficitur quam nec ullamcorper tincidunt. Aenean bibendum lectus nulla, at gravida magna
+                tincidunt
+                ut. Morbi ac sem nisl. Aliquam faucibus turpis sed dolor imperdiet, porta posuere tellus consectetur.
+                Vestibulum at pharetra eros.
+
+                Pellentesque dapibus mauris at nisl consectetur porta. Proin tincidunt lacus eget tempor rhoncus. Cras
+                urna
+                elit, cursus vitae nibh et, condimentum pellentesque massa. Cras accumsan erat sit amet erat tincidunt
+                imperdiet. Nunc urna dui, pretium sed eros vitae, luctus tristique purus. Aenean ut nibh eros. Nam
+                facilisis
+                luctus sem nec vehicula.
+
+                Sed hendrerit sit amet quam id consequat. Aenean ullamcorper nibh at elit imperdiet, nec elementum orci
+                placerat. Phasellus efficitur, enim tincidunt placerat sollicitudin, justo arcu viverra metus, sit amet
+                accumsan lorem purus sed nibh. Etiam vehicula hendrerit sapien, non fringilla justo. Integer sem diam,
+                pulvinar ut ornare a, elementum a sem. Praesent sed tellus dapibus nisl dapibus sollicitudin eu eget
+                metus.
+                Integer molestie molestie nunc nec mattis. Integer et placerat ex. Donec felis lectus, rutrum quis
+                euismod
+                non, commodo sit amet nibh. Vivamus felis elit, interdum sed mattis nec, malesuada ac ex. Aenean quis
+                sapien
+                quam.
+
+                Aliquam ipsum libero, ullamcorper eu sagittis id, mattis finibus est. Fusce in maximus dui. Aenean
+                facilisis
+                lectus in aliquam convallis. Donec iaculis arcu id rhoncus rutrum. Sed rutrum, velit vitae egestas
+                egestas,
+                nunc libero mattis turpis, et pellentesque sem arcu sed diam. Nam aliquam congue ultricies. Nunc quis
+                justo
+                eu nulla sollicitudin auctor.
+
+                Duis eleifend lectus est, at commodo arcu accumsan vitae. In in purus nec erat scelerisque maximus.
+                Phasellus sit amet diam vestibulum lectus dictum gravida ut vitae risus. Suspendisse ut varius erat.
+                Donec
+                semper rutrum ante a dapibus. Fusce convallis viverra orci sit amet gravida. Donec egestas varius
+                pulvinar.
+                Pellentesque quis lacus massa. In et magna sit amet sem lobortis pharetra. Aenean elementum hendrerit
+                lacus.
+                Nam facilisis efficitur mauris ac consectetur. Morbi pharetra, est sed pulvinar congue, augue diam
+                egestas
+                mauris, vitae venenatis enim nunc nec nunc.
+
+                Phasellus vulputate pharetra libero, sit amet blandit nisl interdum eu. Nunc vulputate augue ante, eget
+                vulputate justo venenatis eget. Phasellus metus dui, aliquet elementum vehicula sit amet, lacinia non
+                lectus. Cras eu rutrum velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                cubilia curae; Donec ultrices lacus ac accumsan hendrerit. Suspendisse fermentum a diam sit amet cursus.
+                Integer ut metus ac dolor imperdiet vehicula.
+
+                Suspendisse nulla lectus, dignissim eu tincidunt vel, fermentum ut urna. Pellentesque tincidunt rhoncus
+                lacus et venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam
+                vitae
+                malesuada justo, vel luctus quam. Aliquam malesuada, diam vitae porttitor consequat, augue magna
+                hendrerit
+                nisi, in tincidunt diam risus ac tellus. Sed nunc neque, pulvinar in cursus sed, elementum vitae dolor.
+                Aenean mi odio, porta nec sapien id, euismod ultricies nisl. Nam consequat blandit quam eget tempor.
+
+                Praesent et semper quam. Sed vitae porta nisi, quis sollicitudin velit. Quisque laoreet malesuada arcu
+                non
+                scelerisque. Duis venenatis turpis eu elit luctus, laoreet luctus nulla rutrum. Quisque vel nulla
+                lectus.
+                Duis porta, mi sed mollis interdum, nulla nunc vulputate libero, ut porttitor sapien lacus quis nisi.
+                Integer rhoncus sit amet est vel condimentum. Integer id sagittis mauris. Curabitur sodales, sem sodales
+                rutrum accumsan, sem turpis posuere dui, eget varius mi ipsum et urna. Fusce quis sem diam. Donec
+                egestas
+                accumsan dolor ut ullamcorper.
+
+                Phasellus ut mauris dignissim, bibendum sapien id, consequat erat. Class aptent taciti sociosqu ad
+                litora
+                torquent per conubia nostra, per inceptos himenaeos. Aliquam semper elit elit, vitae interdum tellus
+                elementum quis. Curabitur fermentum bibendum consectetur. Donec vel elit id nisl pulvinar tempus. Aenean
+                pretium felis ut arcu aliquam, et ultricies purus auctor. Nam interdum placerat est at venenatis. Nam ac
+                scelerisque mauris. Curabitur nibh justo, malesuada in feugiat sed, bibendum ac erat. Integer felis mi,
+                lacinia nec iaculis commodo, interdum at dui. Sed facilisis, ex at gravida sodales, elit sem accumsan
+                ipsum,
+                eget pretium justo nulla in sapien. Proin sit amet sem ornare, feugiat eros ac, venenatis enim. Sed
+                tincidunt sapien nec ipsum pretium tempor. Nunc vitae hendrerit neque.
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
