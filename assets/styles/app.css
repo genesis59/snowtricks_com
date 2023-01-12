@@ -1,6 +1,7 @@
 @import "~bootstrap";
 @import "components/header.css";
 @import "components/trick.css";
+@import "components/trick-card-slider.css";
 @import "components/navfooter.css";
 @import "components/navbar.css";
 @import "components/footer.css";
@@ -43,4 +44,15 @@ li {
 a {
     text-decoration: none;
     color: var(--theme-color-light-blue);
+}
+
+@media screen and (min-height: 1080px) {
+    html, body {
+        font-size: 1.4em;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        min-height: 100vh;
+        font-family: "Roboto Thin", sans-serif;
+    }
 }

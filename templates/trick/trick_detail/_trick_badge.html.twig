@@ -1,0 +1,8 @@
+<div class="text-center border-1 border-bottom p-3 ms-5 me-5">
+    <span class="badge rounded-pill bg-success">{% trans with {'%date%': trick.createdAt | date('d/m/Y')} %}snow_trick.trick.badge.created_at{% endtrans %}</span>
+    {% if trick.updatedAt != null %}
+        <span class="badge rounded-pill bg-success">{% trans with {'%date%': trick.updatedAt | date('d/m/Y')} %}snow_trick.trick.badge.updated_at{% endtrans %}</span>
+    {% endif %}
+    <span class="badge rounded-pill bg-warning">{{ trick.trickGroup.name }}</span>
+    <span class="badge rounded-pill bg-primary">{% trans with {'%name%': trick.user.name} %}snow_trick.trick.badge.by_user{% endtrans %}</span>
+</div>
