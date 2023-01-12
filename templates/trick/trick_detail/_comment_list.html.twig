@@ -1,0 +1,18 @@
+<div class="ms-5 me-5">
+    {% for comment in comments %}
+        <div class="row align-items-center mt-3">
+            <div class="col-2">
+                <img
+                        src="{{ asset(picture_user_directory) }}{{ comment.user.photo.name }}"
+                        class="image-user"
+                        alt="{% trans with {'%name%':comment.user.name} %}snow_trick.comment.picture_user_alt{% endtrans %}"
+                >
+            </div>
+            <div class="col-10 border border-1 pe-2 ps-3 pt-4 pb-3 rounded">
+                {% include 'trick/trick_detail/_comment_badge.html.twig' %}
+                {{ comment.content }}
+            </div>
+        </div>
+    {% endfor %}
+    {% include 'trick/trick_detail/_comment_loader.html.twig' %}
+</div>

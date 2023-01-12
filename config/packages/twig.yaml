@@ -5,6 +5,10 @@ twig:
         default_picture: '%default_picture%'
         arrow_page_up_on: '%arrow_page_up_on%'
         trick_per_page: '%trick_per_page%'
+        picture_trick_directory: '%picture_trick_directory%'
+        number_card_by_slide: '%number_card_by_slide%'
+        comment_per_page: '%comment_per_page%'
+        picture_user_directory: '%picture_user_directory%'
 when@test:
     twig:
         strict_variables: true

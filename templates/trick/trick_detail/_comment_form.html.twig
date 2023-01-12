@@ -1,0 +1,12 @@
+<div class="border-1 border-bottom p-3 ms-5 me-5">
+    {{ form_start(form,{'action': path('app_trick',{'slug':trick.slug}), 'method':'POST'}) }}
+    <div class="row mt-3">
+        <div class="col-9">
+            {{ form_row(form.content) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.valider) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
