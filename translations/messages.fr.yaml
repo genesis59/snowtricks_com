@@ -69,3 +69,7 @@ snow_trick:
     button_scroll_end: Il n'y a plus de commentaires
     form-placeholder: Entrer votre commentaire ici.
     picture_user_alt: Image de l'utilisateur %name%
+  modal:
+    question: Êtes-vous sûr de vouloir supprimer cette figure?
+    cancel-button: Annuler
+    delete-button: Oui

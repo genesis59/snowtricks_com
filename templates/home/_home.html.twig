@@ -12,13 +12,14 @@
             </a>
             {% if app.user %}
                 <div>
-                    <a href="{{ path('app_trick_update') }}">
+                    <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}">
                         <img src="{{ asset('images/pencil.png') }}"
                              alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}">
                     </a>
                 </div>
                 <div>
-                    <img src="{{ asset('images/trash.png') }}" alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}">
+                    <img src="{{ asset('images/trash.png') }}" class="modal-trigger"
+                         alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}" data-url="{{ url('app_trick_delete',{'slug': trick.slug}) }}">
                 </div>
             {% endif %}
         </div>
