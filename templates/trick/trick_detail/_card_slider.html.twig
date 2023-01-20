@@ -31,7 +31,7 @@
                                     <div class="card">
                                         {% include 'trick/trick_detail/_card_video_part.html.twig' %}
                                         {% if isTemplateUpdate is defined %}
-                                            {% include 'trick/trick_detail/_card_body_part.html.twig' %}
+                                            {% include 'trick/trick_detail/_card_body_part.html.twig'  with {'video':medias[i]} %}
                                         {% endif %}
                                     </div>
                                 {% endif %}
