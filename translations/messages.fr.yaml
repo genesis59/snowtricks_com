@@ -12,6 +12,13 @@ snow_trick:
     alt:
       image_trick: Image de la figure %name%
   trick:
+    form:
+      name_placeholder: Nom de la figure
+      description_placeholder: Description de la figure
+      trick_group_select_default: Choisissez un groupe
+      submit_label: Sauvegarder
+    update:
+      delete_button: Supprimer
     button-media: Afficher les médias
     badge:
       created_at: ajouté le %date%
