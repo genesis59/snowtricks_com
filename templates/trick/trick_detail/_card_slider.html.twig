@@ -1,52 +1,55 @@
 {% set medias = [] %}
-{% for i in 0..10 %}
-    {% for video in trick.video %}
-        {% set medias = medias|merge([video]) %}
-    {% endfor %}
-    {% for picture in trick.picture %}
-        {% set medias = medias|merge([picture]) %}
-    {% endfor %}
+{% for video in trick.video %}
+    {% set medias = medias|merge([video]) %}
 {% endfor %}
-{#carousel-move-on -> data-bs-ride="carousel", carousel-move-off -> data-bs-interval="false"#}
-<div id="carouselExampleControls" class="carousel slide" data-bs-interval="false">
-    <div class="carousel-inner">
-        {% for media in medias %}
-            {% if loop.index % number_card_by_slide == 1 %}
-                <div class="carousel-item {{ loop.index == 1 ? "active" : "" }}">
-                    <div class="cards-wrapper">
-                        {% set i = loop.index - 1 %}
-                        {% for i in i..i+number_card_by_slide-1 %}
-                            {% if medias[i].fileName is not defined and medias[i].source is not defined %}
-                                {% include 'trick/trick_detail/_card_gruge_part.html.twig' %}
-                            {% endif %}
-                            {% if medias[i].fileName is defined %}
-                                <div class="card">
-                                    {% include 'trick/trick_detail/_card_picture_part.html.twig' %}
-                                    {% if isTemplateUpdate is defined %}
-                                        {% include 'trick/trick_detail/_card_body_part.html.twig' %}
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                            {% if medias[i].source is defined %}
-                                <div class="card">
-                                    {% include 'trick/trick_detail/_card_video_part.html.twig' %}
-                                    {% if isTemplateUpdate is defined %}
-                                        {% include 'trick/trick_detail/_card_body_part.html.twig' %}
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+{% for picture in trick.picture %}
+    {% set medias = medias|merge([picture]) %}
+{% endfor %}
+
+{# carousel-move-on -> data-bs-ride="carousel", carousel-move-off -> data-bs-interval="false" #}
+{% if(medias|length != 0) %}
+    <div id="carouselExampleControls" class="carousel slide" data-bs-interval="false">
+        <div class="carousel-inner">
+            {% for media in medias %}
+                {% if loop.index % number_card_by_slide == 1 %}
+                    <div class="carousel-item {{ loop.index == 1 ? "active" : "" }}">
+                        <div class="cards-wrapper">
+                            {% set i = loop.index - 1 %}
+                            {% for i in i..i+number_card_by_slide-1 %}
+                                {% if medias[i].fileName is not defined and medias[i].source is not defined %}
+                                    {% include 'trick/trick_detail/_card_gruge_part.html.twig' %}
+                                {% endif %}
+                                {% if medias[i].fileName is defined %}
+                                    <div class="card">
+                                        {% include 'trick/trick_detail/_card_picture_part.html.twig' %}
+                                        {% if isTemplateUpdate is defined %}
+                                            {% include 'trick/trick_detail/_card_body_part.html.twig'  with {'picture':medias[i]} %}
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                                {% if medias[i].source is defined %}
+                                    <div class="card">
+                                        {% include 'trick/trick_detail/_card_video_part.html.twig' %}
+                                        {% if isTemplateUpdate is defined %}
+                                            {% include 'trick/trick_detail/_card_body_part.html.twig' %}
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            {% endif %}
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+{% endif %}
