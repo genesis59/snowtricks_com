@@ -20,8 +20,10 @@
         </div>
     {% else %}
         <div>
-            <img src="{{ asset('images/signet.png') }}" width="48"
-                 alt="{% trans %}snow_trick.icon_alt.signet{% endtrans %}">
+            <a href="{{ path('app_trick_create') }}">
+                <img src="{{ asset('images/signet.png') }}" width="48"
+                     alt="{% trans %}snow_trick.icon_alt.signet{% endtrans %}">
+            </a>
         </div>
         <div>
             <a href="{{ path('app_logout') }}">
