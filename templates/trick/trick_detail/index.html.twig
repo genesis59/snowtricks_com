@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% import 'macro/_get_trick_card_picture.html.twig' as macro %}
+
+{% block title %}{{ trick.name }}{% endblock %}
+
+{% block body %}
+    <div class="trick-container">
+        <div class="trick-container-base">
+            {% if app.user %}
+            <div class="trick-container-update p-1 bg-light rounded">
+                <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}" class="card-link p-1"><img
+                            src="{{ asset('images/pencil.png') }}"
+                            alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"></a>
+
+                    <img src="{{ asset('images/trash.png') }}"
+                         alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}" class="modal-trigger"
+                         data-url="{{ url('app_trick_delete',{'slug': trick.slug}) }}"
+                    >
+                </div>
+            {% endif %}
+            <div class=" trick-container-image">
+                    <span>{{ trick.name }}</span>
+                    <img src="{{ asset(picture_trick_upload_directory ~ macro.getCardPicture(trick)| trim) }}"
+                         alt="{% trans with {'%name%': trick.name} %}snow_trick.trick.alt.image_trick{% endtrans %}">
+            </div>
+            {% include 'trick/trick_detail/_card_slider.html.twig' %}
+            {#            {% include 'trick/trick_detail/_card_slider.html.twig' with {isTemplateUpdate:'update'} %} #}
+            <div class="trick-container-content">
+                {% include 'trick/trick_detail/_card_slider_min.html.twig' %}
+                <div class="container sub-trick-container-content">
+                    {% include 'trick/trick_detail/_trick_description.html.twig' %}
+                    <div class="container sub-trick-container-content">
+                        {% include 'trick/trick_detail/_trick_badge.html.twig' %}
+                        {% if app.user %}
+                            {% include 'trick/trick_detail/_comment_form.html.twig' %}
+                        {% endif %}
+                        {% include 'trick/trick_detail/_comment_list.html.twig' %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

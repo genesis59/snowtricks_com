@@ -21,11 +21,11 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             'https://www.youtube.com/embed/12OHPNTeoRs',
             'https://www.youtube.com/embed/CzDjM7h_Fwo',
             'https://www.youtube.com/embed/iKkhKekZNQ8',
-            'https://www.youtube.com/watch?v=Kv0Ah4Xd8d0',
-            'https://www.youtube.com/watch?v=6sNCGEibkWg',
-            'https://www.youtube.com/watch?v=88GJqNWZ5kY',
-            'https://www.youtube.com/watch?v=LhVuEXIT8gc',
-            'https://www.youtube.com/watch?v=HRNXjMBakwM'
+            'https://www.youtube.com/embed/Kv0Ah4Xd8d0',
+            'https://www.youtube.com/embed/6sNCGEibkWg',
+            'https://www.youtube.com/embed/88GJqNWZ5kY',
+            'https://www.youtube.com/embed/LhVuEXIT8gc',
+            'https://www.youtube.com/embed/HRNXjMBakwM'
         ];
         for ($i = 1; $i <= count($videoData); $i++) {
             /** @var Trick $trick */

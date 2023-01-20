@@ -1,0 +1,12 @@
+<div class="text-center mt-3" id="comment-loader">
+    {% if page * comment_per_page < trick.comments|length %}
+        <a
+                class="btn btn-lg btn-primary"
+                href="{{ path('app_trick',{slug:trick.slug}) }}?page={{ page + 1 }}#comment-loader"
+        >
+            {% trans %}snow_trick.comment.button_scroll{% endtrans %}
+        </a>
+    {% else %}
+        <button class="btn btn-lg btn-primary" href="#" disabled="disabled">{% trans %}snow_trick.comment.button_scroll_end{% endtrans %}</button>
+    {% endif %}
+</div>

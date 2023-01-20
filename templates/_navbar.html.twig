@@ -10,10 +10,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('home') }}">{% trans %}snow_trick.navbar.home{% endtrans %}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="#">{% trans %}snow_trick.navbar.tricks{% endtrans %}</a>
-                </li>
                 {% if not app.user %}
                     <li class="nav-item">
                         <a class="nav-link"
@@ -24,6 +20,10 @@
                            href="{{ path('app_login') }}">{% trans %}snow_trick.navbar.in{% endtrans %}</a>
                     </li>
                 {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ path('app_trick_create') }}">{% trans %}snow_trick.navbar.tricks{% endtrans %}</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link login-button"
                            href="{{ path('app_logout') }}">{% trans %}snow_trick.navbar.out{% endtrans %}</a>

@@ -4,9 +4,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-  trick_per_page: 3
+  trick_per_page: 15
+  comment_per_page: 10
   default_picture: 'default.jpg'
   arrow_page_up_on: 8
+  picture_trick_fixtures_data_directory: 'public/images/picture/'
+  picture_trick_fixtures_upload_directory: 'public/images/uploads/'
+  picture_trick_upload_directory: 'images/uploads/'
+  picture_user_directory: 'images/user/'
+  number_card_by_slide: 4
 
 services:
     # default configuration for services in *this* file
@@ -31,3 +37,15 @@ services:
                   name: 'doctrine.orm.entity_listener'
                   event: 'prePersist'
                   entity: 'App\Entity\User'
+    App\EventListener\CommentListener:
+        tags:
+            -
+                  name: 'doctrine.orm.entity_listener'
+                  event: 'prePersist'
+                  entity: 'App\Entity\Comment'
+    App\EventListener\TrickListener:
+        tags:
+            -
+                  name: 'doctrine.orm.entity_listener'
+                  event: 'prePersist'
+                  entity: 'App\Entity\Trick'

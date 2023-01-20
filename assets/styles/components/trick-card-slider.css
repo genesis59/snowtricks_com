@@ -1,0 +1,55 @@
+.cards-wrapper {
+    display: flex;
+    padding: 4% 1% 4% 2%;
+    height: 100%;
+}
+
+.cards-wrapper .card {
+    margin: 0 .5em;
+    width: calc(100%/3);
+    min-height: 100%;
+}
+
+.media-wrapper{
+    width: 100%;
+    min-height: 100%;
+}
+
+.media-wrapper iframe {
+    min-height: 100%;
+}
+
+
+.media-wrapper img {
+    max-width: 100%;
+    min-height: 100%;
+}
+
+.carousel-control-prev span {
+    background-color: #000;
+    border-radius: 4px;
+}
+
+.carousel-control-next span {
+    background-color: #000;
+    border-radius: 4px;
+}
+
+.container-slider-min {
+    display: none;
+}
+
+
+.btn-expand-medias {
+    margin: 20px 0 10px 0;
+}
+
+@media screen and (min-height: 1080px) {
+    #carouselExampleControls {
+        display: none;
+    }
+
+    .container-slider-min {
+        display: flex;
+    }
+}

@@ -2,10 +2,11 @@
 
 {% block title %}{% trans %}snow_trick.title.home{% endtrans %}{% endblock %}
 
+
 {% block body %}
-    <div class="container-fluid arrow-container mb-5">
+    <div class="container-fluid arrow-container mb-5 ">
         <div class="row m-5" id="tricks-list">
-            {% for trick in tricks %}
+            {% for trick in tricks|reverse %}
                 {{ include('home/_home.html.twig') }}
             {% endfor %}
         </div>
@@ -17,4 +18,5 @@
             {% include '_arrow_page_up.html.twig' %}
         {% endif %}
     </div>
+    {% include '_modal.html.twig' %}
 {% endblock %}
