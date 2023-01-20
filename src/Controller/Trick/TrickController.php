@@ -11,32 +11,29 @@ use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TrickController extends AbstractController
 {
-    #[Route('/trick/{slug}', name: 'app_trick')]
+    #[Route('/trick/detail/{slug}', name: 'app_trick')]
     public function __invoke(
         string $slug,
         TrickRepository $trickRepository,
         CommentRepository $commentRepository,
         Request $request,
-        PaginatorService $paginatorService
+        PaginatorService $paginatorService,
+        TranslatorInterface $translator
     ): Response {
         $page = $request->query->get('page') ?? 1;
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if (!$trick) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException($translator->trans('exceptions.not_found', [], 'exceptions'));
         }
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var User $user */
-            $user = $this->getUser();
-            $comment->setUser($user);
             $comment->setTrick($trick);
             $commentRepository->save($comment, true);
             $comment = new Comment();

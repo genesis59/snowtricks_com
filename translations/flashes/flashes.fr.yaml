@@ -6,6 +6,9 @@ flashes:
     reset: Le mot de passe a bien été réinitialisé.
     new_activation: Un email contenant un lien d'activation a été envoyé.
     delete_trick: La figure a bien été supprimée.
+    add_trick: Votre figure a bien été ajoutée.
+  info:
+    no-login: Vous devez être connecté pour accéder à cette espace.
   error:
     reset: La réinitialisation a rencontrée un problème. Veuillez réessayer.
     forgotten_not_activation: Désolé votre compte n'est pas encore actif. Veuillez renseigner votre adresse email pour recevoir un email d'activation.
