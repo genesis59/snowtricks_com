@@ -20,7 +20,7 @@
             {% endif %}
             <div class=" trick-container-image">
                     <span>{{ trick.name }}</span>
-                    <img src="{{ asset('images/picture/' ~ macro.getCardPicture(trick)| trim) }}"
+                    <img src="{{ asset(picture_trick_upload_directory ~ macro.getCardPicture(trick)| trim) }}"
                          alt="{% trans with {'%name%': trick.name} %}snow_trick.trick.alt.image_trick{% endtrans %}">
             </div>
             {% include 'trick/trick_detail/_card_slider.html.twig' %}

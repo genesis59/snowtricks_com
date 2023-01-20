@@ -24,6 +24,18 @@ class TrickDeleteController extends AbstractController
             $this->addFlash('danger', $this->translator->trans('flashes.error.delete_trick', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
+
+        foreach ($trick->getPicture() as $picture) {
+            if (
+                is_string($this->getParameter('picture_trick_upload_directory'))
+                && is_string($picture->getFileName())
+            ) {
+                $fileName = $this->getParameter('picture_trick_upload_directory') . $picture->getFileName();
+                if (file_exists($fileName)) {
+                    unlink($fileName);
+                }
+            }
+        }
         $this->addFlash('success', $this->translator->trans('flashes.success.delete_trick', [], 'flashes'));
         $this->trickRepository->remove($trick, true);
         return $this->redirectToRoute('home');

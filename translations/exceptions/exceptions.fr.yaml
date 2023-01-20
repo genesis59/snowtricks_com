@@ -1,0 +1,2 @@
+exceptions:
+  not_found: 'Désolé la page ou l''action demandée n''existe pas'
