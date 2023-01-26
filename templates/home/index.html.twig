@@ -6,7 +6,7 @@
 {% block body %}
     <div class="container-fluid arrow-container mb-5 ">
         <div class="row m-5" id="tricks-list">
-            {% for trick in tricks|reverse %}
+            {% for trick in tricks %}
                 {{ include('home/_home.html.twig') }}
             {% endfor %}
         </div>
@@ -15,8 +15,8 @@
 
         </div>
         {% if arrow_page_up_on <= page * trick_per_page %}
-            {% include '_arrow_page_up.html.twig' %}
+            {% include 'component/_arrow_page_up.html.twig' %}
         {% endif %}
     </div>
-    {% include '_modal.html.twig' %}
+    {% include 'component/_modal.html.twig' %}
 {% endblock %}

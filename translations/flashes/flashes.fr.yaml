@@ -7,6 +7,7 @@ flashes:
     new_activation: Un email contenant un lien d'activation a été envoyé.
     delete_trick: La figure a bien été supprimée.
     add_trick: Votre figure a bien été ajoutée.
+    update_trick: Votre figure a bien été modifié.
   info:
     no-login: Vous devez être connecté pour accéder à cette espace.
   error:

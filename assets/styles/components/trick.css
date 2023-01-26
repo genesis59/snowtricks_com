@@ -32,7 +32,10 @@
 .trick-container-image {
     position: relative;
 }
-
+.trick-container-image span p {
+    font-size: 0.5em;
+    font-family: sans-serif;
+}
 .trick-container-image span {
     position: absolute;
     font-family: 'Snowboarding', sans-serif;

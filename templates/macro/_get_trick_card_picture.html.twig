@@ -1,6 +1,6 @@
 {% macro getCardPicture(trick) %}
     {% set cardPicture = default_picture %}
-    {% for picture in trick.picture %}
+    {% for picture in trick.pictures %}
         {% if loop.index == 1 %}
             {% set cardPicture = picture.fileName %}
         {% endif %}

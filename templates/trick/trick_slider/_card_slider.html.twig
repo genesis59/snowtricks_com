@@ -1,9 +1,13 @@
 {% set medias = [] %}
-{% for video in trick.video %}
-    {% set medias = medias|merge([video]) %}
+{% for video in trick.videos %}
+    {% if video.uuid != null %}
+        {% set medias = medias|merge([video]) %}
+    {% endif %}
 {% endfor %}
-{% for picture in trick.picture %}
-    {% set medias = medias|merge([picture]) %}
+{% for picture in trick.pictures %}
+    {% if picture.uuid != null %}
+        {% set medias = medias|merge([picture]) %}
+    {% endif %}
 {% endfor %}
 
 {# carousel-move-on -> data-bs-ride="carousel", carousel-move-off -> data-bs-interval="false" #}
@@ -17,21 +21,21 @@
                             {% set i = loop.index - 1 %}
                             {% for i in i..i+number_card_by_slide-1 %}
                                 {% if medias[i].fileName is not defined and medias[i].source is not defined %}
-                                    {% include 'trick/trick_detail/_card_gruge_part.html.twig' %}
+                                    {% include 'trick/trick_slider/_card_gruge_part.html.twig' %}
                                 {% endif %}
                                 {% if medias[i].fileName is defined %}
                                     <div class="card">
-                                        {% include 'trick/trick_detail/_card_picture_part.html.twig' %}
+                                        {% include 'trick/trick_slider/_card_picture_part.html.twig' %}
                                         {% if isTemplateUpdate is defined %}
-                                            {% include 'trick/trick_detail/_card_body_part.html.twig'  with {'picture':medias[i]} %}
+                                            {% include 'trick/trick_slider/_card_body_part.html.twig'  with {'picture':medias[i]} %}
                                         {% endif %}
                                     </div>
                                 {% endif %}
                                 {% if medias[i].source is defined %}
                                     <div class="card">
-                                        {% include 'trick/trick_detail/_card_video_part.html.twig' %}
+                                        {% include 'trick/trick_slider/_card_video_part.html.twig' %}
                                         {% if isTemplateUpdate is defined %}
-                                            {% include 'trick/trick_detail/_card_body_part.html.twig' %}
+                                            {% include 'trick/trick_slider/_card_body_part.html.twig'  with {'video':medias[i]} %}
                                         {% endif %}
                                     </div>
                                 {% endif %}

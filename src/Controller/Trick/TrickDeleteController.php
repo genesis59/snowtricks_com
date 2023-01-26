@@ -2,6 +2,7 @@
 
 namespace App\Controller\Trick;
 
+use App\Entity\Trick;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,13 +20,13 @@ class TrickDeleteController extends AbstractController
     #[Route('/trick/delete/{slug}', name: 'app_trick_delete')]
     public function __invoke(string $slug): Response
     {
+        /** @var Trick $trick */
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
-        if ($trick === null) {
+        if ($trick == null) {
             $this->addFlash('danger', $this->translator->trans('flashes.error.delete_trick', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
-
-        foreach ($trick->getPicture() as $picture) {
+        foreach ($trick->getPictures() as $picture) {
             if (
                 is_string($this->getParameter('picture_trick_upload_directory'))
                 && is_string($picture->getFileName())

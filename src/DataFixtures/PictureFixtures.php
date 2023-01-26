@@ -52,7 +52,6 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
             $trick = $this->getReference('trick' . $i);
             $picture = new Picture();
             $picture->setFileName($pictureData[$i - 1]);
-            $picture->setUuid(Uuid::v4());
             $picture->setIsMain(true);
             $picture->setTrick($trick);
             $manager->persist($picture);

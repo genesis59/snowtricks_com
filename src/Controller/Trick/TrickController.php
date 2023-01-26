@@ -46,7 +46,8 @@ class TrickController extends AbstractController
             'form' => $form->createView(),
             'add_header' => true,
             'fix_footer' => true,
-            'page' => $page
+            'page' => $page,
+            'flashes' => true
         ]);
     }
 }

@@ -15,20 +15,16 @@
     {% endblock %}
 </head>
 <body>
-{% include '_navbar.html.twig' %}
+{% include 'component/_navbar.html.twig' %}
 {% if add_header == true %}
-    {% include '_header.html.twig' %}
+    {% include 'component/_header.html.twig' %}
 {% endif %}
-{% for key,messages in app.flashes %}
-    {% for message in messages %}
-        <div class="container alert alert-{{ key }} mt-3" role="alert">
-            <span>{{ message }}</span>
-        </div>
-    {% endfor %}
-{% endfor %}
+{% if flashes is not defined %}
+    {% include 'component/_flashes.html.twig' %}
+{% endif %}
 {% block body %}{% endblock %}
-{%  include '_modal.html.twig' %}
-{% include '_footer.html.twig' %}
-{% include '_navfooter.html.twig' %}
+{%  include 'component/_modal.html.twig' %}
+{% include 'component/_footer.html.twig' %}
+{% include 'component/_navfooter.html.twig' %}
 </body>
 </html>

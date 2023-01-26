@@ -12,6 +12,7 @@ parameters:
   picture_trick_fixtures_upload_directory: 'public/images/uploads/'
   picture_trick_upload_directory: 'images/uploads/'
   picture_user_directory: 'images/user/'
+  icons_directory: 'images/icons/'
   number_card_by_slide: 4
 
 services:
@@ -49,3 +50,15 @@ services:
                   name: 'doctrine.orm.entity_listener'
                   event: 'prePersist'
                   entity: 'App\Entity\Trick'
+    App\EventListener\VideoListener:
+        tags:
+            -
+                  name: 'doctrine.orm.entity_listener'
+                  event: 'prePersist'
+                  entity: 'App\Entity\Video'
+    App\EventListener\PictureListener:
+        tags:
+            -
+                  name: 'doctrine.orm.entity_listener'
+                  event: 'prePersist'
+                  entity: 'App\Entity\Picture'

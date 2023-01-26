@@ -8,7 +8,6 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Uid\Uuid;
 
 class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -38,8 +37,6 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $oneUser = $users[rand(0, count($users) - 1)];
             $oneTrick = $tricks[rand(0, count($tricks) - 1)];
             $comment = new Comment();
-            $comment->setUuid(Uuid::v4());
-            $comment->setCreatedAt(new \DateTimeImmutable());
             $comment->setContent($commentData[$i]);
             $comment->setUser($oneUser);
             $comment->setTrick($oneTrick);

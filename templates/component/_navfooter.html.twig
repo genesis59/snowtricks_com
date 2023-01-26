@@ -1,7 +1,7 @@
 <footer class="navfooter bg-light {{ fix_footer ? "fixed-bottom" : "sticky-bottom" }}">
     <div>
         <a href="{{ path('home') }}">
-            <img src="{{ asset('images/home.png') }}" alt="{% trans %}snow_trick.icon_alt.home{% endtrans %}">
+            <img src="{{ asset(icons_directory ~ 'home.png') }}" alt="{% trans %}snow_trick.icon_alt.home{% endtrans %}">
         </a>
     </div>
 
@@ -9,25 +9,25 @@
     {% if not app.user %}
         <div>
             <a href="{{ path('app_user_create') }}">
-                <img src="{{ asset('images/signet.png') }}" width="48"
+                <img src="{{ asset(icons_directory ~ 'signet.png') }}" width="48"
                      alt="{% trans %}snow_trick.icon_alt.signet{% endtrans %}">
             </a>
         </div>
         <div>
             <a href="{{ path('app_login') }}">
-                <img src="{{ asset('images/entrer.png') }}" alt="{% trans %}snow_trick.icon_alt.in{% endtrans %}">
+                <img src="{{ asset(icons_directory ~ 'entrer.png') }}" alt="{% trans %}snow_trick.icon_alt.in{% endtrans %}">
             </a>
         </div>
     {% else %}
         <div>
             <a href="{{ path('app_trick_create') }}">
-                <img src="{{ asset('images/signet.png') }}" width="48"
+                <img src="{{ asset(icons_directory ~ 'signet.png') }}" width="48"
                      alt="{% trans %}snow_trick.icon_alt.signet{% endtrans %}">
             </a>
         </div>
         <div>
             <a href="{{ path('app_logout') }}">
-                <img src="{{ asset('images/sortie.png') }}" alt="{% trans %}snow_trick.icon_alt.out{% endtrans %}">
+                <img src="{{ asset(icons_directory ~ 'sortie.png') }}" alt="{% trans %}snow_trick.icon_alt.out{% endtrans %}">
             </a>
         </div>
     {% endif %}

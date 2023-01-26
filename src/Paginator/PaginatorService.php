@@ -29,7 +29,7 @@ class PaginatorService
     public function paginateTrick(mixed $page): array
     {
         $limit = $this->trickPerPage * intval($page);
-        return $this->trickRepository->findBy([], null, $limit);
+        return $this->trickRepository->findBy([], ['createdAt' => "DESC"], $limit);
     }
 
     public function trickPageMax(): int

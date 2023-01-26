@@ -4,6 +4,6 @@
         <p class="{{ app.request.locale == "jp" ? 'catchphrase-box-header-fs-jp' : 'catchphrase-box-header-fs-base' }}">{% trans %}snow_trick.header.title{% endtrans %}</p>
     </div>
     {% if app.request.pathInfo == "/" %}
-        {% include '_arrow_page_down.html.twig' %}
+        {% include 'component/_arrow_page_down.html.twig' %}
     {% endif %}
 </header>
