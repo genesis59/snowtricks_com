@@ -1,0 +1,14 @@
+<button type="button" class="add_item_link btn btn-primary"
+        data-collection-holder-class="pictures"
+        data-url-icon-delete="{{ asset(icons_directory ~ 'trash-white.png') }}"
+>
+    {{ 'snow_trick.trick.form.text_button_pictures_collection'|trans }}
+</button>
+<ul class="row pictures mt-3 me-0 ms-0 mb-0 align-items-center p-0 w-100"
+    data-index="{{ form.pictures|length > 0 ? form.pictures|last.vars.name + 1 : 0 }}"
+    data-prototype="{{ form_widget(form.pictures.vars.prototype)|e('html_attr') }}"
+>
+    {% for picture in form.pictures %}
+        <li class="{{ picture.vars.value.id != null ? 'd-none' : 'row ps-0 pe-0 m-0' }}">{{ form_row(picture.addPictures) }}</li>
+    {% endfor %}
+</ul>

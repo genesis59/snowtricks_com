@@ -6,44 +6,19 @@
 {% block body %}
     <div class="trick-container">
         <div class="trick-container-base">
-
-            <div class="trick-container-update p-1 bg-light rounded">
-                <a href="#" class="card-link p-1"><img src="{{ asset('images/pencil.png') }}"
-                                                       alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"></a>
-                <a href="#" class="card-link p-1"><img src="{{ asset('images/trash.png') }}"
-                                                       alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"></a>
-            </div>
             <div class="trick-container-image">
                 <span>Ajouter une figure</span>
-                <img src="{{ asset('images/picture/' ~ macro.getCardPicture(trick)| trim) }}"
+                <img src="{{ asset('images/picture/' ~ default_picture) }}"
                      alt="{% trans with {'%name%': trick.name} %}snow_trick.trick.alt.image_trick{% endtrans %}">
             </div>
-            {% include 'trick/trick_detail/_card_slider.html.twig' with {isTemplateUpdate:'update'} %}
             <div class="trick-container-content">
-                {% include 'trick/trick_detail/_card_slider_min.html.twig' %}
+                {% include 'trick/trick_slider/_card_slider_min.html.twig' %}
                 <div class="container sub-trick-container-content">
                 </div>
                 <div class="container">
-                    {{ form_start(form) }}
-                    {{ form_row(form.addPictures) }}
-                    <div class="col-12">
-                        {{ form_row(form.name) }}
-                    </div>
-                    <div class="col-12">
-                        {{ form_row(form.description) }}
-                    </div>
-                    <div class="row mt-3 mb-5">
-                        <div class="col-10 text-start">
-                            {{ form_row(form.trickGroup) }}
-                        </div>
-                        <div class="col-2 text-end">
-                            {{ form_row(form.valider) }}
-                        </div>
-                    </div>
-                    {{ form_end(form) }}
+                    {% include 'trick/trick_form/_form_create.html.twig' %}
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}

@@ -9,6 +9,7 @@ twig:
         comment_per_page: '%comment_per_page%'
         picture_user_directory: '%picture_user_directory%'
         picture_trick_upload_directory: '%picture_trick_upload_directory%'
+        icons_directory: '%icons_directory%'
 when@test:
     twig:
         strict_variables: true

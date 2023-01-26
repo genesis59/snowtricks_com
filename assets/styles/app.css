@@ -47,6 +47,10 @@ a {
     color: var(--theme-color-light-blue);
 }
 
+.icon-delete-field {
+    width: 1.3em;
+}
+
 @media screen and (min-height: 1080px) {
     html, body {
         font-size: 1.4em;

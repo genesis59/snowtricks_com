@@ -1,0 +1,7 @@
+{% for key,messages in app.flashes %}
+    {% for message in messages %}
+        <div class="container alert alert-{{ key }} mt-3" role="alert">
+            <span>{{ message }}</span>
+        </div>
+    {% endfor %}
+{% endfor %}

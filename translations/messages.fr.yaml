@@ -11,13 +11,22 @@ snow_trick:
   home:
     alt:
       image_trick: Image de la figure %name%
+  video:
+    form:
+      source_placeholder: Entrer le l'url ici
+      info: Entrez l''url de la vidéo dans le même format que les exemples suivants
   trick:
     form:
       name_placeholder: Nom de la figure
       description_placeholder: Description de la figure
       trick_group_select_default: Choisissez un groupe
       submit_label: Sauvegarder
+      text_button_pictures_collection: Ajouter une image
+      text_button_videos_collection: Ajouter une video
+      label_name: Nom de la figure
+      label_description: Description
     update:
+      main_image_text_update: Modifier la figure
       delete_button: Supprimer
     button-media: Afficher les médias
     badge:

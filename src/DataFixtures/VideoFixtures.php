@@ -31,7 +31,6 @@ class VideoFixtures extends Fixture implements DependentFixtureInterface
             /** @var Trick $trick */
             $trick = $this->getReference('trick' . $i);
             $video = new Video();
-            $video->setUuid(Uuid::v4());
             $video->setSource($videoData[$i - 1]);
             $video->setTrick($trick);
             $manager->persist($video);

@@ -9,10 +9,10 @@
                 >
             </div>
             <div class="col-10 border border-1 pe-2 ps-3 pt-4 pb-3 rounded">
-                {% include 'trick/trick_detail/_comment_badge.html.twig' %}
+                {% include 'trick/trick_comment/_comment_badge.html.twig' %}
                 {{ comment.content }}
             </div>
         </div>
     {% endfor %}
-    {% include 'trick/trick_detail/_comment_loader.html.twig' %}
+    {% include 'trick/trick_comment/_comment_loader.html.twig' %}
 </div>

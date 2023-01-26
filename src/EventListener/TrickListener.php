@@ -22,7 +22,6 @@ class TrickListener
             $user = $this->security->getUser();
             $trick->setUser($user);
         }
-
         $trick->setSlug($this->slugger->slug($trick->getName()));
         $trick->setCreatedAt(new \DateTimeImmutable());
     }
