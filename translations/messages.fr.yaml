@@ -86,6 +86,6 @@ snow_trick:
     form-placeholder: Entrer votre commentaire ici.
     picture_user_alt: Image de l'utilisateur %name%
   modal:
-    question: Êtes-vous sûr de vouloir supprimer cette figure?
+    question: Êtes-vous sûr de vouloir supprimer cette élément?
     cancel-button: Annuler
     delete-button: Oui
