@@ -35,6 +35,10 @@ class TrickController extends AbstractController
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->getUser()) {
+                $this->addFlash('info', $translator->trans('flashes.info.no-login', [], 'flashes'));
+                return $this->redirectToRoute('home');
+            }
             $comment->setTrick($trick);
             $commentRepository->save($comment, true);
             $comment = new Comment();

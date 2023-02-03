@@ -14,7 +14,6 @@ class HomeController extends AbstractController
     public function __invoke(Request $request, PaginatorService $paginatorService): Response
     {
         $page = $request->query->get('page') ?? 1;
-
         $tricks = $paginatorService->paginateTrick($page);
         $pageMax = $paginatorService->trickPageMax();
         return $this->render('home/index.html.twig', [

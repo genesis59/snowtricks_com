@@ -23,6 +23,10 @@ class ManageMainPictureController extends AbstractController
         ManagerRegistry $managerRegistry,
         TranslatorInterface $translator
     ): Response {
+        if (!$this->getUser()) {
+            $this->addFlash('info', $translator->trans('flashes.info.no-login', [], 'flashes'));
+            return $this->redirectToRoute('home');
+        }
         /** @var Trick $trick */
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if ($trick == null) {
