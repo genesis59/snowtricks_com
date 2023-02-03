@@ -9,9 +9,11 @@ parameters:
   default_picture: 'default.jpg'
   arrow_page_up_on: 8
   picture_trick_fixtures_data_directory: 'public/images/picture/'
-  picture_trick_fixtures_upload_directory: 'public/images/uploads/'
-  picture_trick_upload_directory: 'images/uploads/'
-  picture_user_directory: 'images/user/'
+  photo_user_fixtures_data_directory: 'public/images/user/'
+  picture_trick_fixtures_upload_directory: 'public/images/uploads/trick/'
+  photo_user_fixtures_upload_directory: 'public/images/uploads/user/'
+  picture_trick_upload_directory: 'images/uploads/trick/'
+  photo_user_upload_directory: 'images/uploads/user/'
   icons_directory: 'images/icons/'
   number_card_by_slide: 4
 
@@ -49,6 +51,10 @@ services:
             -
                   name: 'doctrine.orm.entity_listener'
                   event: 'prePersist'
+                  entity: 'App\Entity\Trick'
+            -
+                  name: 'doctrine.orm.entity_listener'
+                  event: 'preUpdate'
                   entity: 'App\Entity\Trick'
     App\EventListener\VideoListener:
         tags:

@@ -2,18 +2,22 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Photo;
 use App\Entity\User;
 use App\Event\UserEmailEvent;
 use App\Form\UserFormType;
 use App\Mailer\MailerService;
 use App\Repository\UserRepository;
+use App\UploadService\UploadService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserCreateController extends AbstractController
@@ -26,7 +30,8 @@ class UserCreateController extends AbstractController
         TranslatorInterface $translator,
         EventDispatcherInterface $dispatcher,
         TokenGeneratorInterface $tokenGenerator,
-        MailerService $mailerService
+        MailerService $mailerService,
+        UploadService $uploadService
     ): Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
@@ -36,6 +41,7 @@ class UserCreateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadService->handleUploadPhoto($user);
             $userRepository->save($user, true);
             $dispatcher->dispatch(new UserEmailEvent($user), UserEmailEvent::ACTIVATION_EMAIL);
             $this->addFlash('success', $translator->trans('flashes.success.register', [], 'flashes'));

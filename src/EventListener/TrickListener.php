@@ -25,4 +25,10 @@ class TrickListener
         $trick->setSlug($this->slugger->slug($trick->getName()));
         $trick->setCreatedAt(new \DateTimeImmutable());
     }
+
+    public function preUpdate(Trick $trick, LifecycleEventArgs $args): void
+    {
+        $trick->setSlug($this->slugger->slug($trick->getName()));
+        $trick->setUpdatedAt(new \DateTimeImmutable());
+    }
 }

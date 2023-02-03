@@ -25,6 +25,7 @@ class TrickController extends AbstractController
         PaginatorService $paginatorService,
         TranslatorInterface $translator
     ): Response {
+
         $page = $request->query->get('page') ?? 1;
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if (!$trick) {

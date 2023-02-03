@@ -29,7 +29,12 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $this->getReference('trick4'),
             $this->getReference('trick5'),
             $this->getReference('trick6'),
-            $this->getReference('trick7')
+            $this->getReference('trick7'),
+            $this->getReference('trick8'),
+            $this->getReference('trick9'),
+            $this->getReference('trick10'),
+            $this->getReference('trick11'),
+            $this->getReference('trick12')
         ];
         $commentData = $this->getCommentData();
 

@@ -11,19 +11,20 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TrickDeleteController extends AbstractController
 {
-    public function __construct(
-        private readonly TrickRepository $trickRepository,
-        private readonly TranslatorInterface $translator
-    ) {
-    }
-
     #[Route('/trick/delete/{slug}', name: 'app_trick_delete')]
-    public function __invoke(string $slug): Response
-    {
+    public function __invoke(
+        string $slug,
+        TrickRepository $trickRepository,
+        TranslatorInterface $translator
+    ): Response {
+        if (!$this->getUser()) {
+            $this->addFlash('info', $translator->trans('flashes.info.no-login', [], 'flashes'));
+            return $this->redirectToRoute('home');
+        }
         /** @var Trick $trick */
-        $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if ($trick == null) {
-            $this->addFlash('danger', $this->translator->trans('flashes.error.delete_trick', [], 'flashes'));
+            $this->addFlash('danger', $translator->trans('flashes.error.delete_trick', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
         foreach ($trick->getPictures() as $picture) {
@@ -37,8 +38,8 @@ class TrickDeleteController extends AbstractController
                 }
             }
         }
-        $this->addFlash('success', $this->translator->trans('flashes.success.delete_trick', [], 'flashes'));
-        $this->trickRepository->remove($trick, true);
+        $this->addFlash('success', $translator->trans('flashes.success.delete_trick', [], 'flashes'));
+        $trickRepository->remove($trick, true);
         return $this->redirectToRoute('home');
     }
 }

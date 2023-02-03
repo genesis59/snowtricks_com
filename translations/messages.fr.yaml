@@ -40,6 +40,7 @@ snow_trick:
     home: Bienvenue sur XtremSnowTricks!
   register:
     main: S'inscrire
+    photo: Avatar
     name: Nom
     email: Email
     password: Mot de passe
