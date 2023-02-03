@@ -57,7 +57,10 @@ class TrickFormType extends AbstractType
                 'label' => false,
                 'class' => Group::class,
                 'choice_label' => 'name',
-                'placeholder' => $this->translator->trans('snow_trick.trick.form.trick_group_select_default')
+                'placeholder' => $this->translator->trans('snow_trick.trick.form.trick_group_select_default'),
+                'constraints' => [
+                    new NotBlank(message: 'validators.not_blank_select')
+                ]
             ])
             ->add('valider', SubmitType::class, [
                 'label' => $this->translator->trans('snow_trick.trick.form.submit_label')

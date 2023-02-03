@@ -1,11 +1,16 @@
 validators:
   image:
+    max_width_message: La largeur de l'image est trop grande ({{ width }}px). La largeur maximale autorisée est de {{ max_width }}px.
+    max_height_message: La hauteur de l'image est trop grande ({{ height }}px). La hauteur maximale autorisée est de {{ max_height }}px.
     collection_field_is_empty: Ce champ ne doit pas être vide.
     max_size_message: Le poids de l'image doit être inférieur à 1Mo.
     mime_type_message: Seuls les formats d'images png, jpg, jpeg sont acceptés.
     allow_portrait_message: Les images orientées portrait ne sont pas autorisées.
   unique: Cette valeur existe déjà.
   not_blank: Ce champ ne doit pas être vide.
+  not_blank_select: Veuillez sélectionner un élément de la liste.
+  url:
+    bad_format: Ceci n'est pas une url.
   not_compromised_password: Ce mot de passe a été divulgué lors d'une fuite de données, il ne doit plus être utilisé. Veuillez utiliser un autre mot de passe.
   length:
     min: Cette chaîne est trop courte. Elle doit avoir au minimum {{ limit }} caractère.|Cette chaîne est trop courte. Elle doit avoir au minimum {{ limit }} caractères.
@@ -14,4 +19,5 @@ validators:
   regex:
     password: Le mot de passe n'est pas valide. Il doit comporter au moins 8 caractères dont 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial (-.,?;:§+!*$@%_).
     name: Les caractères spéciaux ne sont pas autorisés.
+    video: l'url renseignée n'a pas le bon format.
 

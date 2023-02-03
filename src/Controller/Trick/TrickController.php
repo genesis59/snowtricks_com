@@ -25,6 +25,7 @@ class TrickController extends AbstractController
         PaginatorService $paginatorService,
         TranslatorInterface $translator
     ): Response {
+
         $page = $request->query->get('page') ?? 1;
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if (!$trick) {
@@ -34,6 +35,10 @@ class TrickController extends AbstractController
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->getUser()) {
+                $this->addFlash('info', $translator->trans('flashes.info.no-login', [], 'flashes'));
+                return $this->redirectToRoute('home');
+            }
             $comment->setTrick($trick);
             $commentRepository->save($comment, true);
             $comment = new Comment();

@@ -31,6 +31,18 @@ class PictureFormType extends AbstractType
                             [],
                             'validators'
                         ),
+                        'maxWidth' => 1280,
+                        'maxWidthMessage' => $this->translator->trans(
+                            'validators.image.max_width_message',
+                            [],
+                            'validators'
+                        ),
+                        'maxHeightMessage' => $this->translator->trans(
+                            'validators.image.max_height_message',
+                            [],
+                            'validators'
+                        ),
+                        'maxHeight' => 1024,
                         'maxSize' => 1048576,
                         'maxSizeMessage' => $this->translator->trans(
                             'validators.image.max_size_message',

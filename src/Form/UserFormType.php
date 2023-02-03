@@ -3,14 +3,17 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserFormType extends AbstractType
@@ -34,6 +37,43 @@ class UserFormType extends AbstractType
                 'label' => $this->translator->trans('snow_trick.register.email'),
                 'attr' => [
                     'class' => 'form-control'
+                ]
+            ])
+            ->add('photo', FileType::class, [
+                'mapped' => false,
+                'label' => $this->translator->trans('snow_trick.register.photo'),
+                'required' => true,
+                'constraints' => [
+                    new Image([
+                        'maxWidth' => 1280,
+                        'maxWidthMessage' => $this->translator->trans(
+                            'validators.image.max_width_message',
+                            [],
+                            'validators'
+                        ),
+                        'maxHeightMessage' => $this->translator->trans(
+                            'validators.image.max_height_message',
+                            [],
+                            'validators'
+                        ),
+                        'maxHeight' => 1024,
+                        'maxSize' => 1048576,
+                        'maxSizeMessage' => $this->translator->trans(
+                            'validators.image.max_size_message',
+                            [],
+                            'validators'
+                        ),
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => $this->translator->trans(
+                            'validators.image.mime_type_message',
+                            [],
+                            'validators'
+                        )
+                    ])
                 ]
             ])
             ->add('password', RepeatedType::class, [

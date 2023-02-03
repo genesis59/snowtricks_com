@@ -2,15 +2,19 @@
 
 namespace App\UploadService;
 
+use App\Entity\Photo;
 use App\Entity\Picture;
 use App\Entity\Trick;
+use App\Entity\User;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class UploadPictureService
+class UploadService
 {
     public function __construct(
         private readonly ParameterBagInterface $parameterBag,
@@ -70,5 +74,25 @@ class UploadPictureService
             return false;
         }
         return true;
+    }
+
+    public function handleUploadPhoto(User $user): void
+    {
+        if (
+            $this->requestStack->getCurrentRequest()->files->get('user_form') &&
+            $this->requestStack->getCurrentRequest()->files->get('user_form')['photo']
+        ) {
+            $uploadedFile = $this->requestStack->getCurrentRequest()->files->get('user_form');
+            $fileName = md5(uniqid()) . '.' . $uploadedFile['photo']->guessExtension();
+            $photo = new Photo();
+            $photo->setUser($user);
+            $photo->setUuid(Uuid::v4());
+            $photo->setName($fileName);
+            $user->setPhoto($photo);
+            $uploadedFile['photo']->move(
+                strval($this->parameterBag->get('photo_user_upload_directory')),
+                $fileName
+            );
+        }
     }
 }

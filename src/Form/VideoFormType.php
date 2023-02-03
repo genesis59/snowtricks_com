@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class VideoFormType extends AbstractType
@@ -25,7 +27,12 @@ class VideoFormType extends AbstractType
                     'placeholder' => $this->translator->trans('snow_trick.video.form.source_placeholder')
                 ],
                 'constraints' => [
-                    new NotBlank(message: $this->translator->trans('validators.not_blank', [], 'validators'))
+                    new NotBlank(message: $this->translator->trans('validators.not_blank', [], 'validators')),
+                    new Url(message: 'validators.url.bad_format'),
+                    new Regex(
+                        pattern: '/^(https:\/\/www\.youtube\.com\/embed\/[\w-]{7,11}|https:\/\/www\.dailymotion\.com\/embed\/video\/[\w-]{7,11})$/',
+                        message: 'validators.regex.video'
+                    )
                 ]
             ]);
     }

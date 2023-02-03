@@ -3,7 +3,7 @@
         <div class="row align-items-center mt-3">
             <div class="col-2">
                 <img
-                        src="{{ asset(picture_user_directory) }}{{ comment.user.photo.name }}"
+                        src="{{ asset(photo_user_upload_directory) }}{{ comment.user.photo.name }}"
                         class="image-user"
                         alt="{% trans with {'%name%':comment.user.name} %}snow_trick.comment.picture_user_alt{% endtrans %}"
                 >

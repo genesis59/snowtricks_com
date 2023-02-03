@@ -6,49 +6,53 @@ use App\Entity\Picture;
 use App\Entity\Trick;
 use App\Repository\PictureRepository;
 use App\Repository\TrickRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ManageMainPictureController extends AbstractController
 {
-    public function __construct(
-        private readonly TrickRepository $trickRepository,
-        private readonly PictureRepository $pictureRepository,
-        private readonly TranslatorInterface $translator
-    ) {
-    }
-
     #[Route('/manage/main/picture/{slug}/{uuid}', name: 'app_manage_main_picture')]
-    public function __invoke(string $slug, string $uuid): Response
-    {
+    public function __invoke(
+        string $slug,
+        string $uuid,
+        TrickRepository $trickRepository,
+        PictureRepository $pictureRepository,
+        ManagerRegistry $managerRegistry,
+        TranslatorInterface $translator
+    ): Response {
+        if (!$this->getUser()) {
+            $this->addFlash('info', $translator->trans('flashes.info.no-login', [], 'flashes'));
+            return $this->redirectToRoute('home');
+        }
         /** @var Trick $trick */
-        $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if ($trick == null) {
-            throw $this->createNotFoundException($this->translator->trans('exceptions.not_found', [], 'exceptions'));
+            throw $this->createNotFoundException($translator->trans('exceptions.not_found', [], 'exceptions'));
         }
         /** @var Picture $picture */
-        $picture = $this->pictureRepository->findOneBy(['uuid' => $uuid]);
+        $picture = $pictureRepository->findOneBy(['uuid' => $uuid]);
         if ($picture == null || $picture->getTrick() !== $trick) {
-            throw $this->createNotFoundException($this->translator->trans('exceptions.not_found', [], 'exceptions'));
+            throw $this->createNotFoundException($translator->trans('exceptions.not_found', [], 'exceptions'));
         }
         if ($picture->isIsMain()) {
             $picture->setIsMain(false);
-            $this->pictureRepository->save($picture, true);
+            $pictureRepository->save($picture, true);
             return $this->redirectToRoute('app_trick_update', [
                 'slug' => $trick->getSlug(),
             ]);
         }
         /** @var Picture $mainPicture */
-        $mainPicture = $this->pictureRepository->findOneBy(['isMain' => true]);
-        if ($mainPicture != null) {
+        $mainPicture = $pictureRepository->findOneBy(['isMain' => true,'trick' => $trick->getId()]);
+
+        if ($mainPicture !== null) {
             $mainPicture->setIsMain(false);
-            $this->pictureRepository->save($mainPicture);
         }
+
         $picture->setIsMain(true);
-        $this->pictureRepository->save($picture, true);
+        $managerRegistry->getManager()->flush();
 
         return $this->redirectToRoute('app_trick_update', [
             'slug' => $trick->getSlug(),
