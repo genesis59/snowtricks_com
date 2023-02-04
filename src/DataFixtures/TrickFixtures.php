@@ -35,7 +35,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             $trick->setName($trickData[$i - 1][0]);
             $trick->setSlug($this->slugger->slug($trickData[$i - 1][0]));
             $trick->setDescription($trickData[$i - 1][1]);
-            $trick->setCreatedAt(new \DateTimeImmutable());
+            $trick->setCreatedAt((new \DateTimeImmutable())->modify('-' . $i . ' day'));
             $trick->setTrickGroup($trickData[$i - 1][2]);
             $trick->setUser($user);
             $this->addReference('trick' . $i, $trick);

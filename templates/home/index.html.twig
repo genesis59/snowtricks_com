@@ -4,11 +4,9 @@
 
 
 {% block body %}
-    <div class="container-fluid arrow-container mb-5 ">
-        <div class="row m-5" id="tricks-list">
-            {% for trick in tricks %}
-                {{ include('home/_home.html.twig') }}
-            {% endfor %}
+    <div class="container-fluid arrow-container mb-5" {{ stimulus_controller('add-trick-homepage', {url: path('home'), page: page, pageMax: page_max }) }}>
+        <div class="row m-5" id="tricks-list" data-add-trick-homepage-target="result">
+            {{ include('home/_home.html.twig') }}
         </div>
         <div id="tricks-loader">
             {{ include('home/_loader.html.twig') }}

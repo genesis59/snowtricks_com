@@ -1,7 +1,8 @@
 <div class="text-center">
-    {% if page < page_max %}
-        <a class="btn btn-lg btn-primary" href="{{ path('home') }}?page={{ page + 1 }}#tricks-loader">Charger plus</a>
-    {% else %}
-        <button class="btn btn-lg btn-primary" href="#" disabled="disabled">FIN</button>
-    {% endif %}
+        <button
+                class="btn btn-lg btn-primary"
+                data-action="add-trick-homepage#onClickMore"
+                data-add-trick-homepage-target="addTrickButton"
+        >{{ 'snow_trick.home.button-add-trick'|trans }}</button>
+        <button data-add-trick-homepage-target="endTrickButton" class="btn btn-lg btn-primary d-none d-" disabled="disabled">{{ 'snow_trick.home.button-end-trick'|trans }}</button>
 </div>

@@ -9,6 +9,8 @@ snow_trick:
     arrow_page_down: Flèche de raccourci vers le haut de la liste des figures
     arrow_page_up: Flèche de raccourci vers le haut de la liste des figures
   home:
+    button-add-trick: Afficher plus de figures
+    button-end-trick: Il n'y a plus de contenu supplémentaires
     alt:
       image_trick: Image de la figure %name%
   video:
