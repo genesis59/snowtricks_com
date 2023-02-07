@@ -19,8 +19,8 @@ class CommentListener
             /** @var User $user */
             $user = $this->security->getUser();
             $comment->setUser($user);
+            $comment->setCreatedAt(new \DateTimeImmutable());
         }
         $comment->setUuid(Uuid::v4());
-        $comment->setCreatedAt(new \DateTimeImmutable());
     }
 }
