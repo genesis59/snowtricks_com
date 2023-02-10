@@ -1,12 +1,13 @@
 <div class="text-center mt-3" id="comment-loader">
-    {% if page * comment_per_page < trick.comments|length %}
-        <a
+        <button
                 class="btn btn-lg btn-primary"
-                href="{{ path('app_trick',{slug:trick.slug}) }}?page={{ page + 1 }}#comment-loader"
+                data-action="pagination-comment#onClickMoreComment"
+                data-pagination-comment-target="startButton"
         >
             {% trans %}snow_trick.comment.button_scroll{% endtrans %}
-        </a>
-    {% else %}
-        <button class="btn btn-lg btn-primary" href="#" disabled="disabled">{% trans %}snow_trick.comment.button_scroll_end{% endtrans %}</button>
-    {% endif %}
+        </button>
+        <button
+                class="btn btn-lg btn-primary d-none" disabled="disabled"
+                data-pagination-comment-target="endButton"
+        >{% trans %}snow_trick.comment.button_scroll_end{% endtrans %}</button>
 </div>

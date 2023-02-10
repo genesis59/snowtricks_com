@@ -1,4 +1,5 @@
 {% import 'macro/_get_trick_card_picture.html.twig' as macro %}
+{% for trick in tricks %}
 <div class="col-12 col-lg-3 my-3 text-center">
     <div class="card">
         <a href="{{ path('app_trick',{slug:trick.slug}) }}"><img
@@ -25,4 +26,4 @@
         </div>
     </div>
 </div>
-
+{% endfor %}

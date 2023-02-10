@@ -15,6 +15,11 @@ class HomeController extends AbstractController
     {
         $page = $request->query->get('page') ?? 1;
         $tricks = $paginatorService->paginateTrick($page);
+        if ($request->query->get('addByStim')) {
+            return $this->render('home/_home.html.twig', [
+                'tricks' => $tricks
+            ]);
+        }
         $pageMax = $paginatorService->trickPageMax();
         return $this->render('home/index.html.twig', [
             'tricks' => $tricks,

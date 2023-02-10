@@ -21,9 +21,9 @@ class TrickListener
             /** @var User $user */
             $user = $this->security->getUser();
             $trick->setUser($user);
+            $trick->setCreatedAt(new \DateTimeImmutable());
         }
         $trick->setSlug($this->slugger->slug($trick->getName()));
-        $trick->setCreatedAt(new \DateTimeImmutable());
     }
 
     public function preUpdate(Trick $trick, LifecycleEventArgs $args): void

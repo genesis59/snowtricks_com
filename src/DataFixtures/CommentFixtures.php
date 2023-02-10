@@ -45,6 +45,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $comment->setContent($commentData[$i]);
             $comment->setUser($oneUser);
             $comment->setTrick($oneTrick);
+            $comment->setCreatedAt((new \DateTimeImmutable())->modify('-' . $i . ' day'));
             $manager->persist($comment);
         }
         $manager->flush();

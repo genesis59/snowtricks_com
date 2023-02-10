@@ -31,6 +31,7 @@ class TrickController extends AbstractController
         if (!$trick) {
             throw $this->createNotFoundException($translator->trans('exceptions.not_found', [], 'exceptions'));
         }
+
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
         $form->handleRequest($request);
@@ -45,6 +46,14 @@ class TrickController extends AbstractController
             $form = $this->createForm(CommentFormType::class, $comment);
         }
         $comments = $paginatorService->paginateComment($trick, $page);
+
+        if ($request->query->get('commentBystim') === '1') {
+            return $this->render('trick/trick_comment/_comment_list.html.twig', [
+                'trick' => $trick,
+                'comments' => $comments,
+                'page' => $page,
+            ]);
+        }
         return $this->render('trick/trick_detail/index.html.twig', [
             'trick' => $trick,
             'comments' => $comments,

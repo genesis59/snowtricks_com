@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as CustomValidator;
 
 #[UniqueEntity(fields: ['name'], message: 'validators.unique')]
 #[UniqueEntity(fields: ['slug'], message: 'validators.unique')]
@@ -27,6 +28,7 @@ class Trick
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\Length(min:2, max:255, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
     #[Assert\NotBlank(message: 'validators.not_blank')]
+    #[CustomValidator\UniqueSlug('validators.custom.unique_slug')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]

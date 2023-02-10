@@ -4,19 +4,22 @@
 
 
 {% block body %}
-    <div class="container-fluid arrow-container mb-5 ">
-        <div class="row m-5" id="tricks-list">
-            {% for trick in tricks %}
-                {{ include('home/_home.html.twig') }}
-            {% endfor %}
+    <div class="container-fluid arrow-container mb-5" {{ stimulus_controller('pagination-trick-homepage', {
+        url: path('home'),
+        page: page,
+        pageMax: page_max ,
+        arrowPageUpOn: arrow_page_up_on,
+        trickPerPage: trick_per_page
+    }) }}>
+        <div class="row m-5" id="tricks-list" data-pagination-trick-homepage-target="result">
+            {{ include('home/_home.html.twig') }}
         </div>
         <div id="tricks-loader">
             {{ include('home/_loader.html.twig') }}
 
         </div>
-        {% if arrow_page_up_on <= page * trick_per_page %}
-            {% include 'component/_arrow_page_up.html.twig' %}
-        {% endif %}
+        {% include 'component/_arrow_page_up.html.twig' %}
+
     </div>
     {% include 'component/_modal.html.twig' %}
 {% endblock %}

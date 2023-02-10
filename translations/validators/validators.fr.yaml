@@ -1,4 +1,7 @@
 validators:
+  custom:
+    account_is_activated: Désolé l'adresse {{ email }} n'est pas encore active.
+    unique_slug: Désolé la valeur {{ value }} n'est plus disponible.
   image:
     max_width_message: La largeur de l'image est trop grande ({{ width }}px). La largeur maximale autorisée est de {{ max_width }}px.
     max_height_message: La hauteur de l'image est trop grande ({{ height }}px). La hauteur maximale autorisée est de {{ max_height }}px.
