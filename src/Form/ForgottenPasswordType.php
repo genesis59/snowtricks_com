@@ -24,7 +24,11 @@ class ForgottenPasswordType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'constraints' => [
-                    new AccountIsActivated($this->translator),
+                    new AccountIsActivated($this->translator->trans(
+                        'validators.custom.account_is_activated',
+                        [],
+                        'validators'
+                    )),
                     new Length(max:255, maxMessage: 'validators.length.max'),
                     new Email(message: 'validators.email'),
                     new NotBlank(message: 'validators.not_blank')

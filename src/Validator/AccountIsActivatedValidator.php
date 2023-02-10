@@ -1,14 +1,11 @@
 <?php
 
-// src/Validator/ContainsAlphanumericValidator.php
 namespace App\Validator;
 
 use App\Repository\UserRepository;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class AccountIsActivatedValidator extends ConstraintValidator
 {
