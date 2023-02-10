@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Validator\AccountIsActivated;
+use App\Validator\AccountIsActivatedValidator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,6 +24,7 @@ class ForgottenPasswordType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'constraints' => [
+                    new AccountIsActivated($this->translator),
                     new Length(max:255, maxMessage: 'validators.length.max'),
                     new Email(message: 'validators.email'),
                     new NotBlank(message: 'validators.not_blank')

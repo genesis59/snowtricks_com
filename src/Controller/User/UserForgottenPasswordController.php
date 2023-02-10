@@ -40,10 +40,6 @@ class UserForgottenPasswordController extends AbstractController
                 $this->addFlash('danger', $translator->trans('flashes.error.forgotten', [], 'flashes'));
                 return $this->redirectToRoute('app_user_forgotten_password');
             }
-            if (!$user->isIsActivated()) {
-                $this->addFlash('danger', $translator->trans('flashes.error.forgotten_not_activation', [], 'flashes'));
-                return $this->redirectToRoute('app_user_new_activation');
-            }
 
             $userRepository->createResetPasswordToken($user, $tokenGenerator->generateToken());
             $dispatcher->dispatch(new UserEmailEvent($user), UserEmailEvent::RESET_EMAIL);
