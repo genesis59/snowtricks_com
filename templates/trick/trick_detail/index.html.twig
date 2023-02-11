@@ -8,14 +8,17 @@
         <div class="trick-container-base">
             {% if app.user %}
                 <div class="trick-container-update p-1 bg-light rounded">
-                    <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}" class="card-link p-1"><img
-                                src="{{ asset(icons_directory ~ 'pencil.png') }}"
-                                alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"></a>
-
-                    <img src="{{ asset(icons_directory ~ 'trash.png') }}"
-                         alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}" class="modal-trigger"
-                         data-url="{{ url('app_trick_delete',{'slug': trick.slug}) }}"
-                    >
+                    <button class="border-0 bg-light">
+                        <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}" class="card-link p-1"><img
+                                    src="{{ asset(icons_directory ~ 'pencil.png') }}"
+                                    alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"></a>
+                    </button>
+                    <button class="border-0 bg-light" data-action="modal#onDelete">
+                        <img src="{{ asset(icons_directory ~ 'trash.png') }}"
+                             alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}" class="modal-trigger"
+                             data-url="{{ url('app_trick_delete',{'slug': trick.slug}) }}"
+                        >
+                    </button>
                 </div>
             {% endif %}
             <div class=" trick-container-image">
@@ -35,8 +38,8 @@
                             class="container sub-trick-container-content"
                             {{ stimulus_controller('pagination-comment',{
                                 url: path('app_trick',{'slug':trick.slug}),
-                                page: page,
-                                pageMax: (trick.comments|length/comment_per_page)|round
+                                countComment: trick.comments|length,
+                                commentPerPage: comment_per_page
                             }) }}
                     >
                         {% include 'trick/trick_detail/_trick_badge.html.twig' %}

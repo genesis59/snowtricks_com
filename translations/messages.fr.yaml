@@ -6,6 +6,8 @@ snow_trick:
     out: Icône se déconnecter
     signet: Icône ajout d'une figure
     home: Icône aller à l'accueil
+    heart_red: Icône coeur rouge plein
+    heart_empty: Icône coeur blanc vide
     arrow_page_down: Flèche de raccourci vers le haut de la liste des figures
     arrow_page_up: Flèche de raccourci vers le haut de la liste des figures
   home:

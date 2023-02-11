@@ -28,7 +28,7 @@ class Trick
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\Length(min:2, max:255, minMessage: 'validators.length.min', maxMessage: 'validators.length.max')]
     #[Assert\NotBlank(message: 'validators.not_blank')]
-    #[CustomValidator\UniqueSlug('validators.custom.unique_slug')]
+    #[CustomValidator\UniqueSlug()]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]

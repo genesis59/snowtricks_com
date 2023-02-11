@@ -17,6 +17,7 @@
 {% block body %}
     <div class="trick-container">
         <div class="trick-container-base">
+            {% if trick.pictures|length > 0  %}
             <div class="trick-container-update p-1 bg-light rounded">
                 {% if uuidMainPicture != null %}
                     <a href="{{ path('app_picture_delete', {'slug': trick.slug,'uuid': uuidMainPicture}) }}"
@@ -27,6 +28,7 @@
                 {% endif %}
 
             </div>
+            {% endif %}
             <div class="trick-container-image">
                 <span><p>{{ 'snow_trick.trick.update.main_image_text_update'|trans }}</p>{{ trick.name }}</span>
                 <img src="{{ asset(picture_trick_upload_directory ~ macro.getCardPicture(trick)| trim) }}"

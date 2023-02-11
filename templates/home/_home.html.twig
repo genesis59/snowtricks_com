@@ -1,29 +1,32 @@
 {% import 'macro/_get_trick_card_picture.html.twig' as macro %}
 {% for trick in tricks %}
-<div class="col-12 col-lg-3 my-3 text-center">
-    <div class="card">
-        <a href="{{ path('app_trick',{slug:trick.slug}) }}"><img
-                    src="{{ asset(picture_trick_upload_directory ~ macro.getCardPicture(trick)| trim) }}" class="card-img-top"
-                    alt="{% trans with {'%name%': trick.name} %}snow_trick.home.alt.image_trick{% endtrans %}"></a>
-        <div class="d-flex card-body justify-content-around align-content-center">
-            <a href="{{ path('app_trick',{slug:trick.slug}) }}">
-                <div>
-                    <h5 class="card-title">{{ trick.name }}</h5>
-                </div>
-            </a>
-            {% if app.user %}
-                <div>
-                    <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}">
-                        <img src="{{ asset(icons_directory ~ 'pencil.png') }}"
-                             alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}">
-                    </a>
-                </div>
-                <div>
-                    <img src="{{ asset(icons_directory ~ 'trash.png') }}" class="modal-trigger"
-                         alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}" data-url="{{ url('app_trick_delete',{'slug': trick.slug}) }}">
-                </div>
-            {% endif %}
+    <div class="col-12 col-lg-3 my-3 text-center">
+        <div class="card">
+            <a href="{{ path('app_trick',{slug:trick.slug}) }}"><img
+                        src="{{ asset(picture_trick_upload_directory ~ macro.getCardPicture(trick)| trim) }}"
+                        class="card-img-top"
+                        alt="{% trans with {'%name%': trick.name} %}snow_trick.home.alt.image_trick{% endtrans %}"></a>
+            <div class="d-flex card-body justify-content-around align-content-center">
+                <a href="{{ path('app_trick',{slug:trick.slug}) }}">
+                    <div>
+                        <h5 class="card-title">{{ trick.name }}</h5>
+                    </div>
+                </a>
+                {% if app.user %}
+                    <div>
+                        <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}" class="ms-5">
+                            <img src="{{ asset(icons_directory ~ 'pencil.png') }}"
+                                 alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}">
+                        </a>
+                        <button class="border-0 bg-light ms-3" data-action="modal#onDelete">
+                            <img src="{{ asset(icons_directory ~ 'trash.png') }}"
+                                 class="modal-trigger"
+                                 alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"
+                                 data-url="{{ url('app_trick_delete',{'slug': trick.slug,'page':page}) }}">
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
 {% endfor %}
