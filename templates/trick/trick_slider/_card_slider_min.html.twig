@@ -1,3 +1,33 @@
-<div class="container-slider-min justify-content-center m-4">
-    <div class="btn btn-primary btn-expand-medias">{% trans %}snow_trick.trick.button-media{% endtrans %}</div>
+<div class="container-slider-min p-2" {{ stimulus_controller('media-button') }}>
+    <button class="btn btn-primary btn-expand-medias col-12 mt-4 mb-3"
+            {{ (trick.pictures|length <= 0 and trick.videos|length <=0) ? '' : 'data-action="media-button#toggle"'}}data-action="media-button#toggle">
+        {% if (trick.pictures|length <= 0 and trick.videos|length <=0) %}
+            {% trans %}snow_trick.trick.button-no-media{% endtrans %}
+        {% else %}
+            {% trans %}snow_trick.trick.button-media{% endtrans %}
+        {% endif %}</button>
+    <div class="d-none" data-media-button-target="mediaList">
+        {% for picture in trick.pictures %}
+            <div class="card col-12 p-0 mt-3 card-picture-min">
+                <img src="{{ asset(picture_trick_upload_directory ~ picture.fileName ) }}"
+                     alt="{% trans with {'%name%': trick.name} %}snow_trick.trick.alt.image_trick{% endtrans %}-i">
+
+                {% if app.user %}
+                    {% include 'trick/trick_slider/_card_body_part.html.twig' with {'picture':picture} %}
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% for video in trick.videos %}
+            <div class="card col-12 mt-3 mb-3 p-0">
+                <div>
+                    <iframe src="{{ video.source }}"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                </div>
+                {% if app.user %}
+                    {% include 'trick/trick_slider/_card_body_part.html.twig' with {'video':video} %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 </div>

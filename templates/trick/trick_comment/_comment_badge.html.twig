@@ -1,4 +1,4 @@
-<div class="mb-3">
-    <span class="badge rounded-pill bg-success">{% trans with {'%date%': comment.createdAt | date('d/m/Y à H:i')} %}snow_trick.trick.badge.created_at{% endtrans %}</span>
-    <span class="badge rounded-pill bg-primary">{% trans with {'%name%': comment.user.name} %}snow_trick.trick.badge.by_user{% endtrans %}</span>
+<div class="row mb-3 justify-content-start">
+    <span class="col-12 col-lg-4 badge rounded-pill bg-success mb-3">{% trans with {'%date%': comment.createdAt | date('d/m/Y à H:i')} %}snow_trick.trick.badge.created_at{% endtrans %}</span>
+    <span class="col-12 col-lg-3 badge rounded-pill bg-primary mb-3 ms-lg-3">{% trans with {'%name%': comment.user.name} %}snow_trick.trick.badge.by_user{% endtrans %}</span>
 </div>

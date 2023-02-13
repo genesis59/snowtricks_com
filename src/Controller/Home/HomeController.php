@@ -28,7 +28,7 @@ class HomeController extends AbstractController
             'page' => $page,
             'page_max' => $pageMax,
             'add_header' => true,
-            'fix_footer' => false
+            'fix_footer' => true
         ]);
     }
 }

@@ -44,12 +44,20 @@
     margin: 20px 0 10px 0;
 }
 
+.fs-custom-card h5{
+    font-size: 1rem;
+}
+
 @media screen and (min-height: 1080px) {
     #carouselExampleControls {
         display: none;
     }
 
     .container-slider-min {
-        display: flex;
+        display: block;
+    }
+
+    .fs-custom-card h5{
+        font-size: 1.5rem;
     }
 }

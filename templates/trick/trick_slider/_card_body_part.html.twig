@@ -1,5 +1,4 @@
 <div class="card-body text-end">
-
     {% if picture is defined %}
         {% if picture.isMain %}
             <a href="{{ path('app_manage_main_picture',{'slug': trick.slug, 'uuid': picture.uuid}) }}"

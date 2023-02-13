@@ -8,11 +8,9 @@
         <div class="trick-container-base">
             {% if app.user %}
                 <div class="trick-container-update p-1 bg-light rounded">
-                    <button class="border-0 bg-light">
-                        <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}" class="card-link p-1"><img
-                                    src="{{ asset(icons_directory ~ 'pencil.png') }}"
-                                    alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"></a>
-                    </button>
+                    <a href="{{ path('app_trick_update',{'slug':trick.slug}) }}" class="card-link p-1"><img
+                                src="{{ asset(icons_directory ~ 'pencil.png') }}"
+                                alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"></a>
                     <button class="border-0 bg-light" data-action="modal#onDelete">
                         <img src="{{ asset(icons_directory ~ 'trash.png') }}"
                              alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}" class="modal-trigger"

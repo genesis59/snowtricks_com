@@ -33,6 +33,7 @@ snow_trick:
       main_image_text_update: Modifier la figure
       delete_button: Supprimer
     button-media: Afficher les médias
+    button-no-media: Cette figure ne possède pas de médias pour le moment
     badge:
       created_at: ajouté le %date%
       updated_at: modifié le %date%
