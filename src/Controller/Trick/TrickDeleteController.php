@@ -5,6 +5,7 @@ namespace App\Controller\Trick;
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -15,7 +16,8 @@ class TrickDeleteController extends AbstractController
     public function __invoke(
         string $slug,
         TrickRepository $trickRepository,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        Request $request
     ): Response {
         if (!$this->getUser()) {
             $this->addFlash('info', $translator->trans('flashes.info.no-login', [], 'flashes'));
@@ -40,6 +42,8 @@ class TrickDeleteController extends AbstractController
         }
         $this->addFlash('success', $translator->trans('flashes.success.delete_trick', [], 'flashes'));
         $trickRepository->remove($trick, true);
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home', [
+            'page' => $request->query->get('page') ?? 1
+        ]);
     }
 }

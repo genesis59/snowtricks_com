@@ -1,7 +1,7 @@
 <header class="box-header">
     <div class="catchphrase-box-header">
         <p class="catchphrase-box-header-fs-base">XtremSnowTricks</p>
-        <p class="{{ app.request.locale == "jp" ? 'catchphrase-box-header-fs-jp' : 'catchphrase-box-header-fs-base' }}">{% trans %}snow_trick.header.title{% endtrans %}</p>
+        <p class="{{ app.request.locale == "jp" ? 'catchphrase-box-header-fs-jp' : 'catchphrase-box-header-fs-base' }} m-0">{% trans %}snow_trick.header.title{% endtrans %}</p>
     </div>
     {% if app.request.pathInfo == "/" %}
         {% include 'component/_arrow_page_down.html.twig' %}

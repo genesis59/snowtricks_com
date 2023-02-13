@@ -4,14 +4,14 @@
 
 
 {% block body %}
-    <div class="container-fluid arrow-container mb-5" {{ stimulus_controller('pagination-trick-homepage', {
+    <div class="container arrow-container p-0 mb-5 fs-custom-card" {{ stimulus_controller('pagination-trick-homepage', {
         url: path('home'),
         page: page,
         pageMax: page_max ,
         arrowPageUpOn: arrow_page_up_on,
         trickPerPage: trick_per_page
     }) }}>
-        <div class="row m-5" id="tricks-list" data-pagination-trick-homepage-target="result">
+        <div class="row mt-4 mb-4" id="tricks-list" data-pagination-trick-homepage-target="result">
             {{ include('home/_home.html.twig') }}
         </div>
         <div id="tricks-loader">
@@ -19,7 +19,5 @@
 
         </div>
         {% include 'component/_arrow_page_up.html.twig' %}
-
     </div>
-    {% include 'component/_modal.html.twig' %}
 {% endblock %}

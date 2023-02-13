@@ -12,10 +12,9 @@
         <li class="{{ video.vars.value.id != null ? 'd-none' : 'row ps-0 pe-0 m-0' }}">{{ form_row(video.source) }}</li>
     {% endfor %}
 </ul>
-<div class="alert alert-info pe-3 ps-3 pt-2 pb-0">
-        <p class="m-1">{{ 'snow_trick.video.form.info'|trans }}:</p>
-        <ul>
-                <li>- https://www.dailymotion.com/embed/video/xXxXxxX</li>
-                <li>- https://www.youtube.com/embed/XxXxXxxxXxX</li>
-        </ul>
+<div class="alert alert-info pe-3 ps-3 pt-2 pb-0 info-video">
+    <p class="m-1 col-12">{{ 'snow_trick.video.form.info'|trans }}:</p>
+    <p class="m-1 col-12">https://www.dailymotion.com/embed/video/xXxXxxX</p>
+    <p>https://www.youtube.com/embed/XxXxXxxxXxX</p>
+
 </div>

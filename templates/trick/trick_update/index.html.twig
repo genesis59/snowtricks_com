@@ -17,6 +17,7 @@
 {% block body %}
     <div class="trick-container">
         <div class="trick-container-base">
+            {% if trick.pictures|length > 0  %}
             <div class="trick-container-update p-1 bg-light rounded">
                 {% if uuidMainPicture != null %}
                     <a href="{{ path('app_picture_delete', {'slug': trick.slug,'uuid': uuidMainPicture}) }}"
@@ -27,8 +28,10 @@
                 {% endif %}
 
             </div>
+            {% endif %}
             <div class="trick-container-image">
-                <span><p>{{ 'snow_trick.trick.update.main_image_text_update'|trans }}</p>{{ trick.name }}</span>
+                <p>{{ 'snow_trick.trick.update.main_image_text_update'|trans }}</p>
+                <span>{{ trick.name }}</span>
                 <img src="{{ asset(picture_trick_upload_directory ~ macro.getCardPicture(trick)| trim) }}"
                      alt="{% trans with {'%name%': trick.name} %}snow_trick.trick.alt.image_trick{% endtrans %}">
             </div>
@@ -38,9 +41,7 @@
             {% include 'trick/trick_slider/_card_slider.html.twig' with {isTemplateUpdate:'update'} %}
             <div class="trick-container-content">
                 {% include 'trick/trick_slider/_card_slider_min.html.twig' %}
-                <div class="container sub-trick-container-content">
-                </div>
-                <div class="container">
+                <div class="container-fluid">
                     {% include 'trick/trick_form/_form_update.html.twig' %}
                 </div>
             </div>

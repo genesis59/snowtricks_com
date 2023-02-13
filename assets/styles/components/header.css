@@ -61,4 +61,16 @@
         width: 3rem;
         transition: 0.6s;
     }
+
+
+    .catchphrase-box-header p{
+        font-size: 6rem;
+    }
+
+    .box-header {
+        background: url("../../../public/images/header.jpg") center;
+        background-size: cover;
+        height: 95vh;
+        margin: 0;
+    }
 }

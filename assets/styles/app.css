@@ -29,9 +29,12 @@
 html, body {
     margin: 0;
     padding: 0;
+    width: 100%;
     box-sizing: border-box;
     min-height: 100vh;
+    font-size: 1rem;
     font-family: "Roboto Thin", sans-serif;
+    overflow: auto;
 }
 
 li {
@@ -51,13 +54,23 @@ a {
     width: 1.3em;
 }
 
+iframe {
+    width: 100%;
+}
+
 @media screen and (min-height: 1080px) {
     html, body {
-        font-size: 1.4em;
+        font-size: 1.8em;
         margin: 0;
         padding: 0;
+        width: 100%;
         box-sizing: border-box;
         min-height: 100vh;
         font-family: "Roboto Thin", sans-serif;
+        overflow: scroll;
+    }
+
+    iframe {
+        height: 60vw;
     }
 }

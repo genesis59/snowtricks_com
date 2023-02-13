@@ -1,40 +1,40 @@
 <div class="card-body text-end">
-
     {% if picture is defined %}
         {% if picture.isMain %}
-            <a href="{{ path('app_manage_main_picture',{'slug': trick.slug, 'uuid': picture.uuid}) }}" class="card-link">
+            <a href="{{ path('app_manage_main_picture',{'slug': trick.slug, 'uuid': picture.uuid}) }}"
+               class="card-link">
                 <img
                         src="{{ asset(icons_directory ~ 'heart-red.png') }}"
-                        alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"
+                        alt="{% trans %}snow_trick.icon_alt.heart_red{% endtrans %}"
                 >
             </a>
         {% else %}
-            <a href="{{ path('app_manage_main_picture',{'slug': trick.slug, 'uuid': picture.uuid}) }}" class="card-link">
+            <a href="{{ path('app_manage_main_picture',{'slug': trick.slug, 'uuid': picture.uuid}) }}"
+               class="card-link">
                 <img
                         src="{{ asset(icons_directory ~ 'heart-empty.png') }}"
-                        alt="{% trans %}snow_trick.icon_alt.pencil{% endtrans %}"
+                        alt="{% trans %}snow_trick.icon_alt.heart_empty{% endtrans %}"
                 >
             </a>
         {% endif %}
-        <img
-                src="{{ asset(icons_directory ~ 'trash.png') }}"
-                class="modal-trigger"
-                alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"
-                data-url="{{ path('app_picture_delete', {'slug': trick.slug,'uuid': picture.uuid}) }}"
-        >
-{#        <a href="" class="card-link"><img#}
-{#                    src="{{ asset(icons_directory ~ 'trash.png') }}"#}
-{#                    alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"></a>#}
+        <button class="border-0 bg-light" data-action="modal#onDelete">
+            <img
+                    src="{{ asset(icons_directory ~ 'trash.png') }}"
+                    class="modal-trigger"
+                    alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"
+                    data-url="{{ path('app_picture_delete', {'slug': trick.slug,'uuid': picture.uuid}) }}"
+            >
+        </button>
     {% endif %}
     {% if video is defined %}
-        <img
-                src="{{ asset(icons_directory ~ 'trash.png') }}"
-                class="modal-trigger"
-                alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"
-                data-url="{{ path('app_video_delete', {'slug': trick.slug,'uuid': video.uuid}) }}"
-        >
-{#        <a href="{{ path('app_video_delete', {'slug': trick.slug,'uuid': video.uuid}) }}" class="card-link"><img#}
-{#                    src="{{ asset(icons_directory ~ 'trash.png') }}"#}
-{#                    alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"></a>#}
+        <button class="border-0 bg-light" data-action="modal#onDelete">
+            <img
+                    src="{{ asset(icons_directory ~ 'trash.png') }}"
+                    class="modal-trigger"
+                    data-action="modal#onDelete"
+                    alt="{% trans %}snow_trick.icon_alt.trash{% endtrans %}"
+                    data-url="{{ path('app_video_delete', {'slug': trick.slug,'uuid': video.uuid}) }}"
+            >
+        </button>
     {% endif %}
 </div>
