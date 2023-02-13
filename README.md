@@ -34,6 +34,7 @@ secrets:generate-keys
 4. Installer les dépendances JS :
     ```bash
     yarn install --force
+    yarn build
     ```
 5. Pour configurer une base de données locale :
     ```bash
