@@ -24,7 +24,6 @@ class UserActivationNewController extends AbstractController
         TokenGeneratorInterface $tokenGenerator,
         EventDispatcherInterface $dispatcher,
         TranslatorInterface $translator,
-        MailerService $mailerService
     ): Response {
 
         if ($this->getUser()) {
