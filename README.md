@@ -1,4 +1,3 @@
-secrets:generate-keys
 # snowtricks_com [![Codacy Badge](https://app.codacy.com/project/badge/Grade/031726461c12457dbfab0c0a13228764)](https://www.codacy.com/gh/genesis59/snowtricks_com/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=genesis59/snowtricks_com&amp;utm_campaign=Badge_Grade)
 ## Environnement de développement
 ### Prérequis
