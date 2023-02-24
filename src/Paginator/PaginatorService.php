@@ -50,4 +50,9 @@ class PaginatorService
         $limit = $this->commentPerPage * intval($page);
         return $this->commentRepository->findBy(['trick' => $trick->getId()], ['createdAt' => "DESC"], $limit);
     }
+
+    public function countTricks(): int
+    {
+        return $this->trickRepository->count([]);
+    }
 }

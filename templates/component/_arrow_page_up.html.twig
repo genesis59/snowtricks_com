@@ -1,4 +1,4 @@
 
-<a href="{{ path('home') }}?page={{ page }}#tricks-list" class="arrowPageUp {{ arrow_page_up_on <= (page * trick_per_page) ? '' : 'd-none'}} " data-pagination-trick-homepage-target="arrowPageUp">
+<a href="{{ path('home') }}#tricks-list" class="arrowPageUp {{ arrow_page_up_on <= (page * trick_per_page) ? '' : 'd-none'}} " data-pagination-trick-homepage-target="arrowPageUp">
     <img src="{{ asset(icons_directory ~ 'arrow-up.png') }}" alt="{% trans %}snow_trick.icon_alt.arrow_page_up{% endtrans %}">
 </a>
