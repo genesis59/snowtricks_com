@@ -5,7 +5,6 @@ namespace App\Controller\User;
 use App\Entity\User;
 use App\Event\UserEmailEvent;
 use App\Form\ForgottenPasswordType;
-use App\Mailer\MailerService;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -22,7 +21,6 @@ class UserForgottenPasswordController extends AbstractController
         Request $request,
         UserRepository $userRepository,
         TokenGeneratorInterface $tokenGenerator,
-        MailerService $mailerService,
         TranslatorInterface $translator,
         EventDispatcherInterface $dispatcher
     ): Response {

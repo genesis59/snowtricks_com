@@ -5,7 +5,6 @@ namespace App\Controller\User;
 use App\Entity\User;
 use App\Event\UserEmailEvent;
 use App\Form\NewActivationFormType;
-use App\Mailer\MailerService;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -24,7 +23,6 @@ class UserActivationNewController extends AbstractController
         TokenGeneratorInterface $tokenGenerator,
         EventDispatcherInterface $dispatcher,
         TranslatorInterface $translator,
-        MailerService $mailerService
     ): Response {
 
         if ($this->getUser()) {

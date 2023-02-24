@@ -19,10 +19,10 @@ secrets:generate-keys
    ```bash
    cd snowtricks_com
    ```
-   
+
 2. Variables d'environnement
-    * Renseignez avec vos données les variables d'environnement DATABASE_URL et MAILER_DSN dans le fichier .env
-   exemples avec une base de données MySQL et MailHog :
+   * Renseignez avec vos données les variables d'environnement DATABASE_URL et MAILER_DSN dans le fichier .env
+     exemples avec une base de données MySQL et MailHog :
    ```php
    DATABASE_URL="mysql://user_name:your_password%@127.0.0.1:3306/snowtricksapp?serverVersion=8&charset=utf8mb4"
    MAILER_DSN=smtp://localhost:1025
