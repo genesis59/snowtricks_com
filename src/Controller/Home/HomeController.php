@@ -23,12 +23,14 @@ class HomeController extends AbstractController
             ]);
         }
         $pageMax = $paginatorService->trickPageMax();
+
         return $this->render('home/index.html.twig', [
             'tricks' => $tricks,
+            'countTricks' => $paginatorService->countTricks(),
             'page' => $page,
             'page_max' => $pageMax,
             'add_header' => true,
-            'fix_footer' => true
+            'fix_footer' => false
         ]);
     }
 }

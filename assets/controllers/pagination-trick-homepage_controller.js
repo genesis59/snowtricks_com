@@ -7,16 +7,17 @@ export default class extends Controller {
         page: String,
         pageMax: String,
         arrowPageUpOn: Number,
-        trickPerPage: Number
+        trickPerPage: Number,
+        countTricks: Number
     }
     static targets = ['result','addTrickButton','endTrickButton','arrowPageUp']
     counter = 1;
     async onClickMore()
     {
         let page = parseInt(this.pageValue) + this.counter;
-        if (this.arrowPageUpOnValue <= page * this.trickPerPageValue) {
+        let countTricksOnPage = this.countTricksValue < (page * this.trickPerPageValue) ? this.countTricksValue : (page * this.trickPerPageValue);
+        if (this.arrowPageUpOnValue <= countTricksOnPage) {
             this.arrowPageUpTarget.classList.remove('d-none');
-            this.arrowPageUpTarget.href = this.urlValue + '?page=' + page + '#tricks-list';
         }
         if (page >= this.pageMaxValue) {
             this.addTrickButtonTarget.classList.add('d-none');
