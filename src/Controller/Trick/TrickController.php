@@ -62,6 +62,9 @@ class TrickController extends AbstractController
             'fix_footer' => true,
             'page' => $page,
             'flashes' => true
-        ]);
+        ], new Response(
+            null,
+            $form->isSubmitted() && !$form->isValid() ? 422 : 200,
+        ));
     }
 }
