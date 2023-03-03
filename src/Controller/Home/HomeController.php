@@ -13,7 +13,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function __invoke(Request $request, PaginatorService $paginatorService): Response
     {
-
         $page = $request->query->get('page') ?? 1;
         $tricks = $paginatorService->paginateTrick($page);
         if ($request->query->get('addByStim')) {
