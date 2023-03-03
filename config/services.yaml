@@ -68,3 +68,9 @@ services:
                   name: 'doctrine.orm.entity_listener'
                   event: 'prePersist'
                   entity: 'App\Entity\Picture'
+
+    App\EventListener\TokenListener:
+      tags:
+        - name: 'doctrine.orm.entity_listener'
+          event: 'prePersist'
+          entity: 'App\Entity\Token'

@@ -2,8 +2,10 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Token;
 use App\Entity\User;
 use App\Form\ResetPasswordType;
+use App\Repository\TokenRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,11 +17,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserResetPasswordController extends AbstractController
 {
-    #[Route('/utilisateur/reinitialisation-password/{token}', name: 'app_user_reset_password')]
+    #[Route('/utilisateur/reinitialisation-password/{token}/{uuidUser}', name: 'app_user_reset_password')]
     public function __invoke(
         string $token,
+        string $uuidUser,
         Request $request,
         UserRepository $userRepository,
+        TokenRepository $tokenRepository,
         TranslatorInterface $translator,
         UserPasswordHasherInterface $passwordHasher,
         UriSigner $uriSigner
@@ -33,12 +37,15 @@ class UserResetPasswordController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        $user = $userRepository->findOneBy(['resetToken' => $token]);
-        if ($user === null) {
+        /** @var User $user */
+        $user = $userRepository->findOneBy(['uuid' => $uuidUser]);
+        /** @var Token $token */
+        $token = $tokenRepository->findOneBy(['token' => $token]);
+        if ($user == null || $token == null) {
             $this->addFlash('danger', $translator->trans('flashes.error.reset', [], 'flashes'));
             return $this->redirectToRoute('home');
         }
-        if ($user->getResetTokenCreatedAt()->diff(new \DateTimeImmutable())->days >= 1) {
+        if ($token->getExpiredAt() < (new \DateTimeImmutable())) {
             $this->addFlash('danger', $translator->trans('flashes.error.forgotten_time', [], 'flashes'));
             return $this->redirectToRoute('app_user_forgotten_password');
         }

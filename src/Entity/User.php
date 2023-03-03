@@ -69,20 +69,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Trick::class)]
     private Collection $tricks;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $activationToken = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $resetToken = null;
-
     #[ORM\Column]
     private ?bool $isActivated = false;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $activationTokenCreatedAt = null;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Token $resetToken = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $resetTokenCreatedAt = null;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Token $activationToken = null;
+
 
     public function __construct()
     {
@@ -276,30 +271,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getActivationToken(): ?string
-    {
-        return $this->activationToken;
-    }
-
-    public function setActivationToken(?string $activationToken): self
-    {
-        $this->activationToken = $activationToken;
-
-        return $this;
-    }
-
-    public function getResetToken(): ?string
-    {
-        return $this->resetToken;
-    }
-
-    public function setResetToken(?string $resetToken): self
-    {
-        $this->resetToken = $resetToken;
-
-        return $this;
-    }
-
     public function isIsActivated(): ?bool
     {
         return $this->isActivated;
@@ -312,26 +283,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getActivationTokenCreatedAt(): ?\DateTimeImmutable
+    public function getResetToken(): ?Token
     {
-        return $this->activationTokenCreatedAt;
+        return $this->resetToken;
     }
 
-    public function setActivationTokenCreatedAt(\DateTimeImmutable $activationTokenCreatedAt): self
+    public function setResetToken(?Token $resetToken): self
     {
-        $this->activationTokenCreatedAt = $activationTokenCreatedAt;
+        $this->resetToken = $resetToken;
 
         return $this;
     }
 
-    public function getResetTokenCreatedAt(): ?\DateTimeImmutable
+    public function getActivationToken(): ?Token
     {
-        return $this->resetTokenCreatedAt;
+        return $this->activationToken;
     }
 
-    public function setResetTokenCreatedAt(?\DateTimeImmutable $resetTokenCreatedAt): self
+    public function setActivationToken(?Token $activationToken): self
     {
-        $this->resetTokenCreatedAt = $resetTokenCreatedAt;
+        $this->activationToken = $activationToken;
 
         return $this;
     }
