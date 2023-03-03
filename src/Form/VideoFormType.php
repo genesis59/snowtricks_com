@@ -30,7 +30,7 @@ class VideoFormType extends AbstractType
                     new NotBlank(message: $this->translator->trans('validators.not_blank', [], 'validators')),
                     new Url(message: 'validators.url.bad_format'),
                     new Regex(
-                        pattern: '/^(https:\/\/www\.youtube\.com\/embed\/[\w-]{7,11}|https:\/\/www\.dailymotion\.com\/embed\/video\/[\w-]{7,11})$/',
+                        pattern: '/^(https:\/\/www\.youtube\.com\/embed\/[\w-]{2,11}|https:\/\/www\.dailymotion\.com\/embed\/video\/[\w-]{2,11})$/',
                         message: 'validators.regex.video'
                     )
                 ]
