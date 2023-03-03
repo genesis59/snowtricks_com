@@ -34,7 +34,8 @@ class UserSubscriber implements EventSubscriberInterface
                 'url' => $this->urlGenerator->generate(
                     'app_user_activation',
                     [
-                        'token' => $event->getUser()->getActivationToken()
+                        'token' => $event->getUser()->getActivationToken()->getToken(),
+                        'uuidUser' => $event->getUser()->getUuid()
                     ],
                     UrlGeneratorInterface::ABSOLUTE_URL
                 )
@@ -52,7 +53,8 @@ class UserSubscriber implements EventSubscriberInterface
                 'url' => $this->urlGenerator->generate(
                     'app_user_reset_password',
                     [
-                        'token' => $event->getUser()->getResetToken()
+                        'token' => $event->getUser()->getResetToken()->getToken(),
+                        'uuidUser' => $event->getUser()->getUuid()
                     ],
                     UrlGeneratorInterface::ABSOLUTE_URL
                 )

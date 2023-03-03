@@ -2,9 +2,11 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Token;
 use App\Entity\User;
 use App\Event\UserEmailEvent;
 use App\Form\ForgottenPasswordType;
+use App\Repository\TokenRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -20,6 +22,7 @@ class UserForgottenPasswordController extends AbstractController
     public function __invoke(
         Request $request,
         UserRepository $userRepository,
+        TokenRepository $tokenRepository,
         TokenGeneratorInterface $tokenGenerator,
         TranslatorInterface $translator,
         EventDispatcherInterface $dispatcher
@@ -39,7 +42,9 @@ class UserForgottenPasswordController extends AbstractController
                 return $this->redirectToRoute('app_user_forgotten_password');
             }
 
-            $userRepository->createResetPasswordToken($user, $tokenGenerator->generateToken());
+            $token = new Token();
+            $tokenRepository->save($token, true);
+            $userRepository->createResetPasswordToken($user, $token);
             $dispatcher->dispatch(new UserEmailEvent($user), UserEmailEvent::RESET_EMAIL);
             $this->addFlash('success', $translator->trans('flashes.success.forgotten', [], 'flashes'));
             return $this->redirectToRoute('home');

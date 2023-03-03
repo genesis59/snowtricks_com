@@ -3,7 +3,7 @@
 ### Prérequis
 * git https://git-scm.com/downloads
 * composer https://getcomposer.org/
-* PHP 8
+* PHP 8.1
 * Symfony CLI https://github.com/symfony-cli/symfony-cli
 ### Installation du projet
 1. Cloner le projet à l'aide de la commande git clone via HTTPS:

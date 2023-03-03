@@ -51,7 +51,7 @@ class TrickCreateController extends AbstractController
             $uploadService->handleUploadPicture($trick);
             $trickRepository->save($trick, true);
             $this->addFlash('success', $translator->trans('flashes.success.add_trick', [], 'flashes'));
-            return $this->redirectToRoute('app_trick', ['slug' => $trick->getSlug()]);
+            return $this->redirectToRoute('home');
         }
         return $this->render('trick/trick_create/index.html.twig', [
             'add_header' => true,

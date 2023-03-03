@@ -2,9 +2,11 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Token;
 use App\Entity\User;
 use App\Event\UserEmailEvent;
 use App\Form\NewActivationFormType;
+use App\Repository\TokenRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -20,6 +22,7 @@ class UserActivationNewController extends AbstractController
     public function __invoke(
         Request $request,
         UserRepository $userRepository,
+        TokenRepository $tokenRepository,
         TokenGeneratorInterface $tokenGenerator,
         EventDispatcherInterface $dispatcher,
         TranslatorInterface $translator,
@@ -44,7 +47,9 @@ class UserActivationNewController extends AbstractController
                 return $this->redirectToRoute('home');
             }
 
-            $userRepository->createActivationToken($user, $tokenGenerator->generateToken());
+            $token = new Token();
+            $tokenRepository->save($token, true);
+            $userRepository->createActivationToken($user, $token);
             $dispatcher->dispatch(new UserEmailEvent($user), UserEmailEvent::ACTIVATION_EMAIL);
             $this->addFlash('success', $translator->trans('flashes.success.new_activation', [], 'flashes'));
             return $this->redirectToRoute('app_login');
